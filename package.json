@@ -1,0 +1,20 @@
+{
+  "name": "xpath-parser",
+  "version": "0.0.1",
+  "description": "A parser for XPath 1.0 expressions.",
+  "main": "lib/xpath_parser.js",
+  "author": "Jonas Amundsen <jonasba@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/badeball/xpath-parser.git"
+  },
+  "devDependencies": {
+    "eslint": "0.24.1",
+    "mocha": "2.3.0",
+    "xpath-lexer": "badeball/xpath-lexer"
+  },
+  "files": [
+    "lib"
+  ],
+  "license": "MIT"
+}
