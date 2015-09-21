@@ -8,10 +8,12 @@
     "type": "git",
     "url": "git://github.com/badeball/xpath-parser.git"
   },
+  "dependecies": {
+    "xpath-lexer": "badeball/xpath-lexer"
+  },
   "devDependencies": {
     "eslint": "0.24.1",
-    "mocha": "2.3.0",
-    "xpath-lexer": "badeball/xpath-lexer"
+    "mocha": "2.3.0"
   },
   "files": [
     "lib"
