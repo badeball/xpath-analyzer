@@ -4,7 +4,7 @@
 
 var Assert = require("assert");
 
-var XRelativeLocationPathLexer = require("xpath-lexer");
+var XPathLexer = require("xpath-lexer");
 
 var AxisSpecifier = require("../../lib/axis_specifier");
 
@@ -17,7 +17,7 @@ var RelativeLocationPathExpr = require("../../lib/parsers/or_expr");
 describe("RelativeLocationPathExpr", function () {
   describe("parse()", function () {
     it("should parse relative location paths", function () {
-      var ast = new RelativeLocationPathExpr(new XRelativeLocationPathLexer("bar//foo")).parse();
+      var ast = new RelativeLocationPathExpr(new XPathLexer("bar//foo")).parse();
 
       Assert.deepEqual(ast, {
         type: ExprType.RELATIVE_LOCATION_PATH,
