@@ -1,5 +1,7 @@
 # xpath-parser
 
+[![Build Status](https://travis-ci.org/badeball/xpath-parser.svg?branch=master)](https://travis-ci.org/badeball/xpath-parser)
+
 A parser for XPath 1.0 expressions.
 
 ```javascript
