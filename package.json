@@ -8,7 +8,7 @@
     "type": "git",
     "url": "git://github.com/badeball/xpath-parser.git"
   },
-  "dependecies": {
+  "dependencies": {
     "xpath-lexer": "badeball/xpath-lexer"
   },
   "devDependencies": {
