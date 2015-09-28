@@ -1,6 +1,6 @@
 {
   "name": "xpath-analyzer",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "A analyzer / parser for XPath 1.0 expressions.",
   "main": "lib/xpath_analyzer.js",
   "author": "Jonas Amundsen <jonasba@gmail.com>",
