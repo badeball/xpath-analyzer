@@ -1,12 +1,12 @@
 {
-  "name": "xpath-parser",
+  "name": "xpath-analyzer",
   "version": "0.0.1",
-  "description": "A parser for XPath 1.0 expressions.",
-  "main": "lib/xpath_parser.js",
+  "description": "A analyzer / parser for XPath 1.0 expressions.",
+  "main": "lib/xpath_analyzer.js",
   "author": "Jonas Amundsen <jonasba@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "git://github.com/badeball/xpath-parser.git"
+    "url": "git://github.com/badeball/xpath-analyzer.git"
   },
   "dependencies": {
     "xpath-lexer": "badeball/xpath-lexer"

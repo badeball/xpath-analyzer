@@ -4,7 +4,7 @@
 
 var Assert = require("assert");
 
-var XPathParser = require("../lib/xpath_parser");
+var XPathAnalyzer = require("../lib/xpath_analyzer");
 
 var AxisSpecifier = require("../lib/axis_specifier");
 
@@ -12,12 +12,12 @@ var ExprType = require("../lib/expr_type");
 
 var NodeType = require("../lib/node_type");
 
-describe("XPathParser", function () {
+describe("XPathAnalyzer", function () {
   describe("parse()", function () {
     it("should parse nested & complex expressions", function () {
       var expression = "id('foo')//following::foo[count(bar/baz) = 1 or 5]";
 
-      var ast = new XPathParser(expression).parse();
+      var ast = new XPathAnalyzer(expression).parse();
 
       Assert.deepEqual(ast, {
         type: ExprType.PATH,
