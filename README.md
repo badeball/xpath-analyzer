@@ -4,6 +4,16 @@
 
 An analyzer / parser for XPath 1.0 expressions.
 
+## Installation
+
+The package can be installed with `npm`.
+
+```
+$ npm install xpath-analyzer
+```
+
+## Usage
+
 ```javascript
 var XPathAnalyzer = require("xpath-analyzer");
 
