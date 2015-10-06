@@ -17,7 +17,7 @@ $ npm install xpath-analyzer
 ```javascript
 var XPathAnalyzer = require("xpath-analyzer");
 
-var analyzer = new XPathAnalyzer("//foo:bar[@id='baz']");
+var analyzer = new XPathAnalyzer("1 + 1");
 
 analyzer.parse();
 
