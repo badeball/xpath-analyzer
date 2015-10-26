@@ -13,7 +13,7 @@ var MultiplicativeExpr = require("../../lib/parsers/multiplicative_expr");
 describe("MultiplicativeExpr", function () {
   describe("parse()", function () {
     it("should parse multiplicative expressions", function () {
-      var ast = new MultiplicativeExpr(new XPathLexer("1 * 2")).parse();
+      var ast = MultiplicativeExpr.parse(new XPathLexer("1 * 2"));
 
       Assert.deepEqual(ast, {
         type: ExprType.MULTIPLICATIVE,
@@ -29,7 +29,7 @@ describe("MultiplicativeExpr", function () {
     });
 
     it("should parse divisional expressions", function () {
-      var ast = new MultiplicativeExpr(new XPathLexer("1 div 2")).parse();
+      var ast = MultiplicativeExpr.parse(new XPathLexer("1 div 2"));
 
       Assert.deepEqual(ast, {
         type: ExprType.DIVISIONAL,
@@ -45,7 +45,7 @@ describe("MultiplicativeExpr", function () {
     });
 
     it("should parse modulus expressions", function () {
-      var ast = new MultiplicativeExpr(new XPathLexer("1 mod 2")).parse();
+      var ast = MultiplicativeExpr.parse(new XPathLexer("1 mod 2"));
 
       Assert.deepEqual(ast, {
         type: ExprType.MODULUS,

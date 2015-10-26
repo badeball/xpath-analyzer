@@ -13,7 +13,7 @@ var FunctionCall = require("../../lib/parsers/function_call");
 describe("FunctionCall", function () {
   describe("parse()", function () {
     it("should parse function arguments", function () {
-      var ast = new FunctionCall(new XPathLexer("id('foo')")).parse();
+      var ast = FunctionCall.parse(new XPathLexer("id('foo')"));
 
       Assert.deepEqual(ast, {
         type: ExprType.FUNCTION_CALL,

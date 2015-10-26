@@ -13,7 +13,7 @@ var AndExpr = require("../../lib/parsers/and_expr");
 describe("AndExpr", function () {
   describe("parse()", function () {
     it("should parse or expressions", function () {
-      var ast = new AndExpr(new XPathLexer("1 and 2")).parse();
+      var ast = AndExpr.parse(new XPathLexer("1 and 2"));
 
       Assert.deepEqual(ast, {
         type: ExprType.AND,

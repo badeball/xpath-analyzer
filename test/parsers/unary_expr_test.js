@@ -13,7 +13,7 @@ var UnaryExpr = require("../../lib/parsers/unary_expr");
 describe("UnaryExpr", function () {
   describe("parse()", function () {
     it("should parse negation expressions", function () {
-      var ast = new UnaryExpr(new XPathLexer("-1")).parse();
+      var ast = UnaryExpr.parse(new XPathLexer("-1"));
 
       Assert.deepEqual(ast, {
         type: ExprType.NEGATION,

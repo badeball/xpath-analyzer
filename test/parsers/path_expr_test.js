@@ -17,7 +17,7 @@ var PathExpr = require("../../lib/parsers/path_expr");
 describe("PathExpr", function () {
   describe("parse()", function () {
     it("should parse filter expressions with path", function () {
-      var ast = new PathExpr(new XPathLexer("id()//foo")).parse();
+      var ast = PathExpr.parse(new XPathLexer("id()//foo"));
 
       Assert.deepEqual(ast, {
         type: ExprType.PATH,

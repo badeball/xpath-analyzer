@@ -13,7 +13,7 @@ var UnionExpr = require("../../lib/parsers/union_expr");
 describe("UnionExpr", function () {
   describe("parse()", function () {
     it("should parse union expressions", function () {
-      var ast = new UnionExpr(new XPathLexer("1 | 2")).parse();
+      var ast = UnionExpr.parse(new XPathLexer("1 | 2"));
 
       Assert.deepEqual(ast, {
         type: ExprType.UNION,

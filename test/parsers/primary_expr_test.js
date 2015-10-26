@@ -13,7 +13,7 @@ var PrimaryExpr = require("../../lib/parsers/primary_expr");
 describe("PrimaryExpr", function () {
   describe("parse()", function () {
     it("should parse integers", function () {
-      var ast = new PrimaryExpr(new XPathLexer("123")).parse();
+      var ast = PrimaryExpr.parse(new XPathLexer("123"));
 
       Assert.deepEqual(ast, {
         type: ExprType.NUMBER,
@@ -22,7 +22,7 @@ describe("PrimaryExpr", function () {
     });
 
     it("should parse floating numbers", function () {
-      var ast = new PrimaryExpr(new XPathLexer("123.123")).parse();
+      var ast = PrimaryExpr.parse(new XPathLexer("123.123"));
 
       Assert.deepEqual(ast, {
         type: ExprType.NUMBER,
@@ -31,7 +31,7 @@ describe("PrimaryExpr", function () {
     });
 
     it("should parse literals", function () {
-      var ast = new PrimaryExpr(new XPathLexer("'foo'")).parse();
+      var ast = PrimaryExpr.parse(new XPathLexer("'foo'"));
 
       Assert.deepEqual(ast, {
         type: ExprType.LITERAL,
@@ -40,7 +40,7 @@ describe("PrimaryExpr", function () {
     });
 
     it("should parse groups", function () {
-      var ast = new PrimaryExpr(new XPathLexer("('foo')")).parse();
+      var ast = PrimaryExpr.parse(new XPathLexer("('foo')"));
 
       Assert.deepEqual(ast, {
         type: ExprType.LITERAL,
@@ -49,7 +49,7 @@ describe("PrimaryExpr", function () {
     });
 
     it("should parse function calls", function () {
-      var ast = new PrimaryExpr(new XPathLexer("id()")).parse();
+      var ast = PrimaryExpr.parse(new XPathLexer("id()"));
 
       Assert.deepEqual(ast, {
         type: ExprType.FUNCTION_CALL,
@@ -58,7 +58,7 @@ describe("PrimaryExpr", function () {
     });
 
     it("should not parse node type tests", function () {
-      var ast = new PrimaryExpr(new XPathLexer("comment()")).parse();
+      var ast = PrimaryExpr.parse(new XPathLexer("comment()"));
 
       Assert.equal(ast, undefined);
     });

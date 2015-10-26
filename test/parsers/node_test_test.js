@@ -13,7 +13,7 @@ var NodeTest = require("../../lib/parsers/node_test");
 describe("NodeTest", function () {
   describe("parse()", function () {
     it("should parse node tests containing a name test", function () {
-      var ast = new NodeTest(new XPathLexer("foo")).parse();
+      var ast = NodeTest.parse(new XPathLexer("foo"));
 
       Assert.deepEqual(ast, {
         name: "foo"
@@ -21,7 +21,7 @@ describe("NodeTest", function () {
     });
 
     it("should parse node tests containing an abbreviated name test *", function () {
-      var ast = new NodeTest(new XPathLexer("*")).parse();
+      var ast = NodeTest.parse(new XPathLexer("*"));
 
       Assert.deepEqual(ast, {
         name: "*"
@@ -29,7 +29,7 @@ describe("NodeTest", function () {
     });
 
     it("should parse node tests containing a type test", function () {
-      var ast = new NodeTest(new XPathLexer("text()")).parse();
+      var ast = NodeTest.parse(new XPathLexer("text()"));
 
       Assert.deepEqual(ast, {
         type: NodeType.TEXT
@@ -38,7 +38,7 @@ describe("NodeTest", function () {
 
     it("should throw upon unknown node type", function () {
       Assert.throws(function () {
-        new NodeTest(new XPathLexer("foo()")).parse();
+        NodeTest.parse(new XPathLexer("foo()"));
       });
     });
   });

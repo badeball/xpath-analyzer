@@ -13,7 +13,7 @@ var OrExpr = require("../../lib/parsers/or_expr");
 describe("OrExpr", function () {
   describe("parse()", function () {
     it("should parse or expressions", function () {
-      var ast = new OrExpr(new XPathLexer("1 or 2")).parse();
+      var ast = OrExpr.parse(new XPathLexer("1 or 2"));
 
       Assert.deepEqual(ast, {
         type: ExprType.OR,

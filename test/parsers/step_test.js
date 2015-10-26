@@ -17,7 +17,7 @@ var Step = require("../../lib/parsers/step");
 describe("Step", function () {
   describe("parse()", function () {
     it("should parse steps not containing an axis", function () {
-      var ast = new Step(new XPathLexer("foo")).parse();
+      var ast = Step.parse(new XPathLexer("foo"));
 
       Assert.deepEqual(ast, {
         axis: AxisSpecifier.CHILD,
@@ -28,7 +28,7 @@ describe("Step", function () {
     });
 
     it("should parse steps containing an axis", function () {
-      var ast = new Step(new XPathLexer("parent::foo")).parse();
+      var ast = Step.parse(new XPathLexer("parent::foo"));
 
       Assert.deepEqual(ast, {
         axis: AxisSpecifier.PARENT,
@@ -40,12 +40,12 @@ describe("Step", function () {
 
     it("should throw upon unknown axis", function () {
       Assert.throws(function () {
-        new Step(new XPathLexer("bar::foo")).parse();
+        Step.parse(new XPathLexer("bar::foo"));
       });
     });
 
     it("should parse the abbreviated axis specifier @", function () {
-      var ast = new Step(new XPathLexer("@foo")).parse();
+      var ast = Step.parse(new XPathLexer("@foo"));
 
       Assert.deepEqual(ast, {
         axis: AxisSpecifier.ATTRIBUTE,
@@ -56,7 +56,7 @@ describe("Step", function () {
     });
 
     it("should parse the abbreviated axis specifier ..", function () {
-      var ast = new Step(new XPathLexer("..")).parse();
+      var ast = Step.parse(new XPathLexer(".."));
 
       Assert.deepEqual(ast, {
         axis: AxisSpecifier.PARENT,
@@ -67,7 +67,7 @@ describe("Step", function () {
     });
 
     it("should parse the abbreviated axis specifier .", function () {
-      var ast = new Step(new XPathLexer(".")).parse();
+      var ast = Step.parse(new XPathLexer("."));
 
       Assert.deepEqual(ast, {
         axis: AxisSpecifier.SELF,
@@ -78,7 +78,7 @@ describe("Step", function () {
     });
 
     it("should parse steps containing predicates", function () {
-      var ast = new Step(new XPathLexer("*[1]")).parse();
+      var ast = Step.parse(new XPathLexer("*[1]"));
 
       Assert.deepEqual(ast, {
         axis: AxisSpecifier.CHILD,

@@ -17,7 +17,7 @@ var RelativeLocationPathExpr = require("../../lib/parsers/relative_location_path
 describe("RelativeLocationPathExpr", function () {
   describe("parse()", function () {
     it("should parse relative location paths", function () {
-      var ast = new RelativeLocationPathExpr(new XPathLexer("bar//foo")).parse();
+      var ast = RelativeLocationPathExpr.parse(new XPathLexer("bar//foo"));
 
       Assert.deepEqual(ast, {
         type: ExprType.RELATIVE_LOCATION_PATH,
