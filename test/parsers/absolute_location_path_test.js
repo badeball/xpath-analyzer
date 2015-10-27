@@ -12,12 +12,14 @@ var ExprType = require("../../lib/expr_type");
 
 var NodeType = require("../../lib/node_type");
 
+var Expr = require("../../lib/parsers/expr");
+
 var AbsoluteLocationPathExpr = require("../../lib/parsers/absolute_location_path");
 
 describe("AbsoluteLocationPathExpr", function () {
   describe("parse()", function () {
     it("should parse the trivial absolute location path", function () {
-      var ast = AbsoluteLocationPathExpr.parse(new XPathLexer("/"));
+      var ast = AbsoluteLocationPathExpr.parse(Expr, new XPathLexer("/"));
 
       Assert.deepEqual(ast, {
         type: ExprType.ABSOLUTE_LOCATION_PATH,
@@ -26,7 +28,7 @@ describe("AbsoluteLocationPathExpr", function () {
     });
 
     it("should parse more complex absolute location paths", function () {
-      var ast = AbsoluteLocationPathExpr.parse(new XPathLexer("/bar//foo"));
+      var ast = AbsoluteLocationPathExpr.parse(Expr, new XPathLexer("/bar//foo"));
 
       Assert.deepEqual(ast, {
         type: ExprType.ABSOLUTE_LOCATION_PATH,

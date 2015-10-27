@@ -12,12 +12,14 @@ var ExprType = require("../../lib/expr_type");
 
 var NodeType = require("../../lib/node_type");
 
+var Expr = require("../../lib/parsers/expr");
+
 var Step = require("../../lib/parsers/step");
 
 describe("Step", function () {
   describe("parse()", function () {
     it("should parse steps not containing an axis", function () {
-      var ast = Step.parse(new XPathLexer("foo"));
+      var ast = Step.parse(Expr, new XPathLexer("foo"));
 
       Assert.deepEqual(ast, {
         axis: AxisSpecifier.CHILD,
@@ -28,7 +30,7 @@ describe("Step", function () {
     });
 
     it("should parse steps containing an axis", function () {
-      var ast = Step.parse(new XPathLexer("parent::foo"));
+      var ast = Step.parse(Expr, new XPathLexer("parent::foo"));
 
       Assert.deepEqual(ast, {
         axis: AxisSpecifier.PARENT,
@@ -40,12 +42,12 @@ describe("Step", function () {
 
     it("should throw upon unknown axis", function () {
       Assert.throws(function () {
-        Step.parse(new XPathLexer("bar::foo"));
+        Step.parse(Expr, new XPathLexer("bar::foo"));
       });
     });
 
     it("should parse the abbreviated axis specifier @", function () {
-      var ast = Step.parse(new XPathLexer("@foo"));
+      var ast = Step.parse(Expr, new XPathLexer("@foo"));
 
       Assert.deepEqual(ast, {
         axis: AxisSpecifier.ATTRIBUTE,
@@ -56,7 +58,7 @@ describe("Step", function () {
     });
 
     it("should parse the abbreviated axis specifier ..", function () {
-      var ast = Step.parse(new XPathLexer(".."));
+      var ast = Step.parse(Expr, new XPathLexer(".."));
 
       Assert.deepEqual(ast, {
         axis: AxisSpecifier.PARENT,
@@ -67,7 +69,7 @@ describe("Step", function () {
     });
 
     it("should parse the abbreviated axis specifier .", function () {
-      var ast = Step.parse(new XPathLexer("."));
+      var ast = Step.parse(Expr, new XPathLexer("."));
 
       Assert.deepEqual(ast, {
         axis: AxisSpecifier.SELF,
@@ -78,7 +80,7 @@ describe("Step", function () {
     });
 
     it("should parse steps containing predicates", function () {
-      var ast = Step.parse(new XPathLexer("*[1]"));
+      var ast = Step.parse(Expr, new XPathLexer("*[1]"));
 
       Assert.deepEqual(ast, {
         axis: AxisSpecifier.CHILD,

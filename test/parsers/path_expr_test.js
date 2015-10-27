@@ -12,12 +12,14 @@ var ExprType = require("../../lib/expr_type");
 
 var NodeType = require("../../lib/node_type");
 
+var Expr = require("../../lib/parsers/expr");
+
 var PathExpr = require("../../lib/parsers/path_expr");
 
 describe("PathExpr", function () {
   describe("parse()", function () {
     it("should parse filter expressions with path", function () {
-      var ast = PathExpr.parse(new XPathLexer("id()//foo"));
+      var ast = PathExpr.parse(Expr, new XPathLexer("id()//foo"));
 
       Assert.deepEqual(ast, {
         type: ExprType.PATH,

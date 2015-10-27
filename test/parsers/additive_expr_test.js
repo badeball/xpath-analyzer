@@ -8,12 +8,14 @@ var XPathLexer = require("xpath-lexer");
 
 var ExprType = require("../../lib/expr_type");
 
+var Expr = require("../../lib/parsers/expr");
+
 var AdditiveExpr = require("../../lib/parsers/additive_expr");
 
 describe("AdditiveExpr", function () {
   describe("parse()", function () {
     it("should parse additive expressions", function () {
-      var ast = AdditiveExpr.parse(new XPathLexer("1 + 2"));
+      var ast = AdditiveExpr.parse(Expr, new XPathLexer("1 + 2"));
 
       Assert.deepEqual(ast, {
         type: ExprType.ADDITIVE,
@@ -29,7 +31,7 @@ describe("AdditiveExpr", function () {
     });
 
     it("should parse subtractive expressions", function () {
-      var ast = AdditiveExpr.parse(new XPathLexer("1 - 2"));
+      var ast = AdditiveExpr.parse(Expr, new XPathLexer("1 - 2"));
 
       Assert.deepEqual(ast, {
         type: ExprType.SUBTRACTIVE,

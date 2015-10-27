@@ -12,12 +12,14 @@ var ExprType = require("../../lib/expr_type");
 
 var NodeType = require("../../lib/node_type");
 
+var Expr = require("../../lib/parsers/expr");
+
 var RelativeLocationPathExpr = require("../../lib/parsers/relative_location_path");
 
 describe("RelativeLocationPathExpr", function () {
   describe("parse()", function () {
     it("should parse relative location paths", function () {
-      var ast = RelativeLocationPathExpr.parse(new XPathLexer("bar//foo"));
+      var ast = RelativeLocationPathExpr.parse(Expr, new XPathLexer("bar//foo"));
 
       Assert.deepEqual(ast, {
         type: ExprType.RELATIVE_LOCATION_PATH,

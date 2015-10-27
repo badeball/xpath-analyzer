@@ -8,12 +8,14 @@ var XPathLexer = require("xpath-lexer");
 
 var ExprType = require("../../lib/expr_type");
 
+var Expr = require("../../lib/parsers/expr");
+
 var FilterExpr = require("../../lib/parsers/filter_expr");
 
 describe("FilterExpr", function () {
   describe("parse()", function () {
     it("should parse filter expressions with predicates", function () {
-      var ast = FilterExpr.parse(new XPathLexer("id()[1]"));
+      var ast = FilterExpr.parse(Expr, new XPathLexer("id()[1]"));
 
       Assert.deepEqual(ast, {
         type: ExprType.FILTER,

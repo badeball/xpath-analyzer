@@ -8,12 +8,14 @@ var XPathLexer = require("xpath-lexer");
 
 var ExprType = require("../../lib/expr_type");
 
+var Expr = require("../../lib/parsers/expr");
+
 var EqualityExpr = require("../../lib/parsers/equality_expr");
 
 describe("EqualityExpr", function () {
   describe("parse()", function () {
     it("should parse equality expressions", function () {
-      var ast = EqualityExpr.parse(new XPathLexer("1 = 2"));
+      var ast = EqualityExpr.parse(Expr, new XPathLexer("1 = 2"));
 
       Assert.deepEqual(ast, {
         type: ExprType.EQUALITY,
@@ -29,7 +31,7 @@ describe("EqualityExpr", function () {
     });
 
     it("should parse inequality expressions", function () {
-      var ast = EqualityExpr.parse(new XPathLexer("1 != 2"));
+      var ast = EqualityExpr.parse(Expr, new XPathLexer("1 != 2"));
 
       Assert.deepEqual(ast, {
         type: ExprType.INEQUALITY,

@@ -8,12 +8,14 @@ var XPathLexer = require("xpath-lexer");
 
 var ExprType = require("../../lib/expr_type");
 
+var Expr = require("../../lib/parsers/expr");
+
 var AndExpr = require("../../lib/parsers/and_expr");
 
 describe("AndExpr", function () {
   describe("parse()", function () {
     it("should parse or expressions", function () {
-      var ast = AndExpr.parse(new XPathLexer("1 and 2"));
+      var ast = AndExpr.parse(Expr, new XPathLexer("1 and 2"));
 
       Assert.deepEqual(ast, {
         type: ExprType.AND,
