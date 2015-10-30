@@ -8,7 +8,7 @@ var XPathLexer = require("xpath-lexer");
 
 var ExprType = require("../../lib/expr_type");
 
-var RelationalExpr = require("../../lib/parsers/or_expr");
+var RelationalExpr = require("../../lib/parsers/relational_expr");
 
 describe("RelationalExpr", function () {
   describe("parse()", function () {

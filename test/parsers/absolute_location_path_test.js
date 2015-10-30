@@ -12,7 +12,7 @@ var ExprType = require("../../lib/expr_type");
 
 var NodeType = require("../../lib/node_type");
 
-var AbsoluteLocationPathExpr = require("../../lib/parsers/or_expr");
+var AbsoluteLocationPathExpr = require("../../lib/parsers/absolute_location_path");
 
 describe("AbsoluteLocationPathExpr", function () {
   describe("parse()", function () {

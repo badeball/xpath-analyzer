@@ -8,7 +8,7 @@ var XPathLexer = require("xpath-lexer");
 
 var ExprType = require("../../lib/expr_type");
 
-var MultiplicativeExpr = require("../../lib/parsers/or_expr");
+var MultiplicativeExpr = require("../../lib/parsers/multiplicative_expr");
 
 describe("MultiplicativeExpr", function () {
   describe("parse()", function () {

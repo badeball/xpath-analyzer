@@ -8,7 +8,7 @@ var XPathLexer = require("xpath-lexer");
 
 var ExprType = require("../../lib/expr_type");
 
-var UnionExpr = require("../../lib/parsers/or_expr");
+var UnionExpr = require("../../lib/parsers/union_expr");
 
 describe("UnionExpr", function () {
   describe("parse()", function () {

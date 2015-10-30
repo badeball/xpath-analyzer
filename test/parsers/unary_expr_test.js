@@ -8,7 +8,7 @@ var XPathLexer = require("xpath-lexer");
 
 var ExprType = require("../../lib/expr_type");
 
-var UnaryExpr = require("../../lib/parsers/or_expr");
+var UnaryExpr = require("../../lib/parsers/unary_expr");
 
 describe("UnaryExpr", function () {
   describe("parse()", function () {

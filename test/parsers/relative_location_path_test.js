@@ -12,7 +12,7 @@ var ExprType = require("../../lib/expr_type");
 
 var NodeType = require("../../lib/node_type");
 
-var RelativeLocationPathExpr = require("../../lib/parsers/or_expr");
+var RelativeLocationPathExpr = require("../../lib/parsers/relative_location_path");
 
 describe("RelativeLocationPathExpr", function () {
   describe("parse()", function () {

@@ -8,7 +8,7 @@ var XPathLexer = require("xpath-lexer");
 
 var ExprType = require("../../lib/expr_type");
 
-var EqualityExpr = require("../../lib/parsers/or_expr");
+var EqualityExpr = require("../../lib/parsers/equality_expr");
 
 describe("EqualityExpr", function () {
   describe("parse()", function () {
