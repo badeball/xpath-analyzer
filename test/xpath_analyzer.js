@@ -10,8 +10,27 @@ var ExprType = require("../lib/expr_type");
 
 var NodeType = require("../lib/node_type");
 
+function itShouldThrowUponExpression (expression, message) {
+  describe("when given the erroneous expression \"" + expression + "\"", function () {
+    it("should throw \"" + message + "\"", function () {
+      Assert.throws(function () {
+        new XPathAnalyzer(expression).parse();
+      }, new RegExp(message));
+    });
+  });
+}
+
 describe("XPathAnalyzer", function () {
   describe("parse()", function () {
+    itShouldThrowUponExpression("/bar::foo", "Invalid axis specifier at position 1");
+    itShouldThrowUponExpression("/child::foo()", "Invalid node type at position 8");
+    itShouldThrowUponExpression("/comment(/foo", "Invalid token at position 9, expected closing parenthesis");
+    itShouldThrowUponExpression("/comment('foo')", "Invalid token at position 9, expected closing parenthesis");
+    itShouldThrowUponExpression("/processing-instruction()", "Invalid token at position 24, expected a literal");
+    itShouldThrowUponExpression("(/foo", "Invalid token at position 5, expected closing parenthesis");
+    itShouldThrowUponExpression("/foo[0", "Invalid token at position 6, expected closing bracket");
+    itShouldThrowUponExpression("(/foo) 1", "Unexpected token at position 7");
+
     it("should parse nested & complex expressions", function () {
       var expression = "id('foo')//following::foo[count(bar/baz) = 1 or 5]";
 

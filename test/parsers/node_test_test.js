@@ -36,6 +36,15 @@ describe("NodeTest", function () {
       });
     });
 
+    it("should parse node tests containing a type test with a literal", function () {
+      var ast = NodeTest.parse(Expr, new XPathLexer("processing-instruction('foo')"));
+
+      Assert.deepEqual(ast, {
+        type: NodeType.PROCESSING_INSTRUCTION,
+        name: "foo"
+      });
+    });
+
     it("should throw upon unknown node type", function () {
       Assert.throws(function () {
         NodeTest.parse(Expr, new XPathLexer("foo()"));
