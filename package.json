@@ -9,7 +9,7 @@
     "url": "git://github.com/badeball/xpath-analyzer.git"
   },
   "dependencies": {
-    "xpath-lexer": "^1.0.0"
+    "xpath-lexer": "^1.2.0"
   },
   "devDependencies": {
     "codeclimate-test-reporter": "0.1.1",
