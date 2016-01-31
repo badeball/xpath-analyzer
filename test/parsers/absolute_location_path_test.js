@@ -16,7 +16,7 @@ var AbsoluteLocationPathExpr = require("../../lib/parsers/absolute_location_path
 
 describe("AbsoluteLocationPathExpr", function () {
   describe("parse()", function () {
-    it("should parse the trivial absolute location path", function () {
+    it("should parse the trivial absolute location path without steps", function () {
       var ast = AbsoluteLocationPathExpr.parse(Expr, new XPathLexer("/"));
 
       Assert.deepEqual(ast, {
@@ -25,7 +25,26 @@ describe("AbsoluteLocationPathExpr", function () {
       });
     });
 
-    it("should parse more complex absolute location paths", function () {
+    it("should parse absolute location paths with steps", function () {
+      var ast = AbsoluteLocationPathExpr.parse(Expr, new XPathLexer("/bar/foo"));
+
+      Assert.deepEqual(ast, {
+        type: ExprType.ABSOLUTE_LOCATION_PATH,
+        steps: [{
+          axis: AxisSpecifier.CHILD,
+          test: {
+            name: "bar"
+          }
+        }, {
+          axis: AxisSpecifier.CHILD,
+          test: {
+            name: "foo"
+          }
+        }]
+      });
+    });
+
+    it("should parse absolute location paths with steps (descendant)", function () {
       var ast = AbsoluteLocationPathExpr.parse(Expr, new XPathLexer("/bar//foo"));
 
       Assert.deepEqual(ast, {

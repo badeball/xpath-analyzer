@@ -24,5 +24,21 @@ describe("FunctionCall", function () {
         }]
       });
     });
+
+    it("should parse multiple function arguments", function () {
+      var ast = FunctionCall.parse(Expr, new XPathLexer("id('foo', 'bar')"));
+
+      Assert.deepEqual(ast, {
+        type: ExprType.FUNCTION_CALL,
+        name: "id",
+        args: [{
+          type: ExprType.LITERAL,
+          string: "foo"
+        }, {
+          type: ExprType.LITERAL,
+          string: "bar"
+        }]
+      });
+    });
   });
 });

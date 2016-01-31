@@ -12,7 +12,7 @@ var FilterExpr = require("../../lib/parsers/filter_expr");
 
 describe("FilterExpr", function () {
   describe("parse()", function () {
-    it("should parse filter expressions with predicates", function () {
+    it("should parse primary expressions with predicates", function () {
       var ast = FilterExpr.parse(Expr, new XPathLexer("id()[1]"));
 
       Assert.deepEqual(ast, {
