@@ -26,7 +26,6 @@ describe("XPathAnalyzer", function () {
     itShouldThrowUponExpression("/child::foo()", "Invalid node type at position 8");
     itShouldThrowUponExpression("/comment(/foo", "Invalid token at position 9, expected closing parenthesis");
     itShouldThrowUponExpression("/comment('foo')", "Invalid token at position 9, expected closing parenthesis");
-    itShouldThrowUponExpression("/processing-instruction()", "Invalid token at position 24, expected a literal");
     itShouldThrowUponExpression("(/foo", "Invalid token at position 5, expected closing parenthesis");
     itShouldThrowUponExpression("/foo[0", "Invalid token at position 6, expected closing bracket");
     itShouldThrowUponExpression("(/foo) 1", "Unexpected token at position 7");
