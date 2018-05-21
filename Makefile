@@ -1,6 +1,6 @@
 MOCHA := ./node_modules/.bin/_mocha
 ESLINT := ./node_modules/.bin/eslint
-ISTANBUL := ./node_modules/.bin/istanbul
+NYC := ./node_modules/.bin/nyc
 
 all: lint test
 
@@ -13,6 +13,7 @@ test:
 	@$(MOCHA) --recursive --reporter dot
 
 test-cover:
-	@$(ISTANBUL) cover --report lcov $(MOCHA) -- --recursive --reporter dot
+	@$(NYC) --temp-directory coverage/ $(MOCHA) --recursive --reporter dot
+	@$(NYC) --temp-directory coverage/ report --reporter text-lcov > coverage.lcov
 
 .PHONY: lint test test-cover
