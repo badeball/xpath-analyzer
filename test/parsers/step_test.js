@@ -1,18 +1,16 @@
-"use strict";
+import Assert from "assert";
 
-var Assert = require("assert");
+import XPathLexer from "xpath-lexer";
 
-var XPathLexer = require("xpath-lexer");
+import { ATTRIBUTE, CHILD, PARENT, SELF } from "../../lib/axis_specifier";
 
-var AxisSpecifier = require("../../lib/axis_specifier");
+import { NUMBER } from "../../lib/expr_type";
 
-var ExprType = require("../../lib/expr_type");
+import { NODE } from "../../lib/node_type";
 
-var NodeType = require("../../lib/node_type");
+import * as Expr from "../../lib/parsers/expr";
 
-var Expr = require("../../lib/parsers/expr");
-
-var Step = require("../../lib/parsers/step");
+import * as Step from "../../lib/parsers/step";
 
 describe("Step", function () {
   describe("parse()", function () {
@@ -20,7 +18,7 @@ describe("Step", function () {
       var ast = Step.parse(Expr, new XPathLexer("foo"));
 
       Assert.deepEqual(ast, {
-        axis: AxisSpecifier.CHILD,
+        axis: CHILD,
         test: {
           name: "foo"
         }
@@ -31,7 +29,7 @@ describe("Step", function () {
       var ast = Step.parse(Expr, new XPathLexer("parent::foo"));
 
       Assert.deepEqual(ast, {
-        axis: AxisSpecifier.PARENT,
+        axis: PARENT,
         test: {
           name: "foo"
         }
@@ -48,7 +46,7 @@ describe("Step", function () {
       var ast = Step.parse(Expr, new XPathLexer("@foo"));
 
       Assert.deepEqual(ast, {
-        axis: AxisSpecifier.ATTRIBUTE,
+        axis: ATTRIBUTE,
         test: {
           name: "foo"
         }
@@ -59,9 +57,9 @@ describe("Step", function () {
       var ast = Step.parse(Expr, new XPathLexer(".."));
 
       Assert.deepEqual(ast, {
-        axis: AxisSpecifier.PARENT,
+        axis: PARENT,
         test: {
-          type: NodeType.NODE
+          type: NODE
         }
       });
     });
@@ -70,9 +68,9 @@ describe("Step", function () {
       var ast = Step.parse(Expr, new XPathLexer("."));
 
       Assert.deepEqual(ast, {
-        axis: AxisSpecifier.SELF,
+        axis: SELF,
         test: {
-          type: NodeType.NODE
+          type: NODE
         }
       });
     });
@@ -81,12 +79,12 @@ describe("Step", function () {
       var ast = Step.parse(Expr, new XPathLexer("*[1]"));
 
       Assert.deepEqual(ast, {
-        axis: AxisSpecifier.CHILD,
+        axis: CHILD,
         test: {
           name: "*"
         },
         predicates: [{
-          type: ExprType.NUMBER,
+          type: NUMBER,
           number: 1
         }]
       });

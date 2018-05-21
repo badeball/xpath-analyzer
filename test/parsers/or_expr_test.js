@@ -1,14 +1,12 @@
-"use strict";
+import Assert from "assert";
 
-var Assert = require("assert");
+import XPathLexer from "xpath-lexer";
 
-var XPathLexer = require("xpath-lexer");
+import { NUMBER, OR } from "../../lib/expr_type";
 
-var ExprType = require("../../lib/expr_type");
+import * as Expr from "../../lib/parsers/expr";
 
-var Expr = require("../../lib/parsers/expr");
-
-var OrExpr = require("../../lib/parsers/or_expr");
+import * as OrExpr from "../../lib/parsers/or_expr";
 
 describe("OrExpr", function () {
   describe("parse()", function () {
@@ -16,13 +14,13 @@ describe("OrExpr", function () {
       var ast = OrExpr.parse(Expr, new XPathLexer("1 or 2"));
 
       Assert.deepEqual(ast, {
-        type: ExprType.OR,
+        type: OR,
         lhs: {
-          type: ExprType.NUMBER,
+          type: NUMBER,
           number: 1
         },
         rhs: {
-          type: ExprType.NUMBER,
+          type: NUMBER,
           number: 2
         }
       });

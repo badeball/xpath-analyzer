@@ -1,14 +1,12 @@
-"use strict";
+import Assert from "assert";
 
-var Assert = require("assert");
+import XPathLexer from "xpath-lexer";
 
-var XPathLexer = require("xpath-lexer");
+import { AND, NUMBER } from "../../lib/expr_type";
 
-var ExprType = require("../../lib/expr_type");
+import * as Expr from "../../lib/parsers/expr";
 
-var Expr = require("../../lib/parsers/expr");
-
-var AndExpr = require("../../lib/parsers/and_expr");
+import * as AndExpr from "../../lib/parsers/and_expr";
 
 describe("AndExpr", function () {
   describe("parse()", function () {
@@ -16,13 +14,13 @@ describe("AndExpr", function () {
       var ast = AndExpr.parse(Expr, new XPathLexer("1 and 2"));
 
       Assert.deepEqual(ast, {
-        type: ExprType.AND,
+        type: AND,
         lhs: {
-          type: ExprType.NUMBER,
+          type: NUMBER,
           number: 1
         },
         rhs: {
-          type: ExprType.NUMBER,
+          type: NUMBER,
           number: 2
         }
       });

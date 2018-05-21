@@ -1,14 +1,12 @@
-"use strict";
+import Assert from "assert";
 
-var Assert = require("assert");
+import XPathLexer from "xpath-lexer";
 
-var XPathLexer = require("xpath-lexer");
+import { NUMBER, UNION } from "../../lib/expr_type";
 
-var ExprType = require("../../lib/expr_type");
+import * as Expr from "../../lib/parsers/expr";
 
-var Expr = require("../../lib/parsers/expr");
-
-var UnionExpr = require("../../lib/parsers/union_expr");
+import * as UnionExpr from "../../lib/parsers/union_expr";
 
 describe("UnionExpr", function () {
   describe("parse()", function () {
@@ -16,13 +14,13 @@ describe("UnionExpr", function () {
       var ast = UnionExpr.parse(Expr, new XPathLexer("1 | 2"));
 
       Assert.deepEqual(ast, {
-        type: ExprType.UNION,
+        type: UNION,
         lhs: {
-          type: ExprType.NUMBER,
+          type: NUMBER,
           number: 1
         },
         rhs: {
-          type: ExprType.NUMBER,
+          type: NUMBER,
           number: 2
         }
       });

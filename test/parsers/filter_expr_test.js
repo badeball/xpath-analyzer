@@ -1,14 +1,12 @@
-"use strict";
+import Assert from "assert";
 
-var Assert = require("assert");
+import XPathLexer from "xpath-lexer";
 
-var XPathLexer = require("xpath-lexer");
+import { FILTER, FUNCTION_CALL, NUMBER } from "../../lib/expr_type";
 
-var ExprType = require("../../lib/expr_type");
+import * as Expr from "../../lib/parsers/expr";
 
-var Expr = require("../../lib/parsers/expr");
-
-var FilterExpr = require("../../lib/parsers/filter_expr");
+import * as FilterExpr from "../../lib/parsers/filter_expr";
 
 describe("FilterExpr", function () {
   describe("parse()", function () {
@@ -16,13 +14,13 @@ describe("FilterExpr", function () {
       var ast = FilterExpr.parse(Expr, new XPathLexer("id()[1]"));
 
       Assert.deepEqual(ast, {
-        type: ExprType.FILTER,
+        type: FILTER,
         primary: {
-          type: ExprType.FUNCTION_CALL,
+          type: FUNCTION_CALL,
           name: "id"
         },
         predicates: [{
-          type: ExprType.NUMBER,
+          type: NUMBER,
           number: 1
         }]
       });

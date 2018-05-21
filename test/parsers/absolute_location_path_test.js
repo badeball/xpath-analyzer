@@ -1,18 +1,16 @@
-"use strict";
+import Assert from "assert";
 
-var Assert = require("assert");
+import XPathLexer from "xpath-lexer";
 
-var XPathLexer = require("xpath-lexer");
+import { CHILD, DESCENDANT_OR_SELF } from "../../lib/axis_specifier";
 
-var AxisSpecifier = require("../../lib/axis_specifier");
+import { ABSOLUTE_LOCATION_PATH } from "../../lib/expr_type";
 
-var ExprType = require("../../lib/expr_type");
+import { NODE } from "../../lib/node_type";
 
-var NodeType = require("../../lib/node_type");
+import * as Expr from "../../lib/parsers/expr";
 
-var Expr = require("../../lib/parsers/expr");
-
-var AbsoluteLocationPathExpr = require("../../lib/parsers/absolute_location_path");
+import * as AbsoluteLocationPathExpr from "../../lib/parsers/absolute_location_path";
 
 describe("AbsoluteLocationPathExpr", function () {
   describe("parse()", function () {
@@ -20,7 +18,7 @@ describe("AbsoluteLocationPathExpr", function () {
       var ast = AbsoluteLocationPathExpr.parse(Expr, new XPathLexer("/"));
 
       Assert.deepEqual(ast, {
-        type: ExprType.ABSOLUTE_LOCATION_PATH,
+        type: ABSOLUTE_LOCATION_PATH,
         steps: []
       });
     });
@@ -29,14 +27,14 @@ describe("AbsoluteLocationPathExpr", function () {
       var ast = AbsoluteLocationPathExpr.parse(Expr, new XPathLexer("/bar/foo"));
 
       Assert.deepEqual(ast, {
-        type: ExprType.ABSOLUTE_LOCATION_PATH,
+        type: ABSOLUTE_LOCATION_PATH,
         steps: [{
-          axis: AxisSpecifier.CHILD,
+          axis: CHILD,
           test: {
             name: "bar"
           }
         }, {
-          axis: AxisSpecifier.CHILD,
+          axis: CHILD,
           test: {
             name: "foo"
           }
@@ -48,19 +46,19 @@ describe("AbsoluteLocationPathExpr", function () {
       var ast = AbsoluteLocationPathExpr.parse(Expr, new XPathLexer("/bar//foo"));
 
       Assert.deepEqual(ast, {
-        type: ExprType.ABSOLUTE_LOCATION_PATH,
+        type: ABSOLUTE_LOCATION_PATH,
         steps: [{
-          axis: AxisSpecifier.CHILD,
+          axis: CHILD,
           test: {
             name: "bar"
           }
         }, {
-          axis: AxisSpecifier.DESCENDANT_OR_SELF,
+          axis: DESCENDANT_OR_SELF,
           test: {
-            type: NodeType.NODE
+            type: NODE
           }
         }, {
-          axis: AxisSpecifier.CHILD,
+          axis: CHILD,
           test: {
             name: "foo"
           }

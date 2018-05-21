@@ -14,10 +14,24 @@ The package can be installed with `npm`.
 $ npm install xpath-analyzer
 ```
 
-## Usage
+## Usage (ES modules)
 
 ```javascript
-var XPathAnalyzer = require("xpath-analyzer");
+import XPathAnalyzer from "xpath-analyzer";
+
+let analyzer = new XPathAnalyzer("1 + 1");
+
+analyzer.parse();
+
+// { type: 'additive',
+//   lhs: { type: 'number', number: 1 },
+//   rhs: { type: 'number', number: 1 } }
+```
+
+## Usage (CommonJS)
+
+```javascript
+var XPathAnalyzer = require("xpath-analyzer").default;
 
 var analyzer = new XPathAnalyzer("1 + 1");
 

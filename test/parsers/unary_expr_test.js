@@ -1,14 +1,12 @@
-"use strict";
+import Assert from "assert";
 
-var Assert = require("assert");
+import XPathLexer from "xpath-lexer";
 
-var XPathLexer = require("xpath-lexer");
+import { NEGATION, NUMBER } from "../../lib/expr_type";
 
-var ExprType = require("../../lib/expr_type");
+import * as Expr from "../../lib/parsers/expr";
 
-var Expr = require("../../lib/parsers/expr");
-
-var UnaryExpr = require("../../lib/parsers/unary_expr");
+import * as UnaryExpr from "../../lib/parsers/unary_expr";
 
 describe("UnaryExpr", function () {
   describe("parse()", function () {
@@ -16,9 +14,9 @@ describe("UnaryExpr", function () {
       var ast = UnaryExpr.parse(Expr, new XPathLexer("-1"));
 
       Assert.deepEqual(ast, {
-        type: ExprType.NEGATION,
+        type: NEGATION,
         lhs: {
-          type: ExprType.NUMBER,
+          type: NUMBER,
           number: 1
         }
       });

@@ -1,14 +1,12 @@
-"use strict";
+import Assert from "assert";
 
-var Assert = require("assert");
+import XPathLexer from "xpath-lexer";
 
-var XPathLexer = require("xpath-lexer");
+import { PROCESSING_INSTRUCTION, TEXT } from "../../lib/node_type";
 
-var NodeType = require("../../lib/node_type");
+import * as Expr from "../../lib/parsers/expr";
 
-var Expr = require("../../lib/parsers/expr");
-
-var NodeTest = require("../../lib/parsers/node_test");
+import * as NodeTest from "../../lib/parsers/node_test";
 
 describe("NodeTest", function () {
   describe("parse()", function () {
@@ -32,7 +30,7 @@ describe("NodeTest", function () {
       var ast = NodeTest.parse(Expr, new XPathLexer("text()"));
 
       Assert.deepEqual(ast, {
-        type: NodeType.TEXT
+        type: TEXT
       });
     });
 
@@ -40,7 +38,7 @@ describe("NodeTest", function () {
       var ast = NodeTest.parse(Expr, new XPathLexer("processing-instruction('foo')"));
 
       Assert.deepEqual(ast, {
-        type: NodeType.PROCESSING_INSTRUCTION,
+        type: PROCESSING_INSTRUCTION,
         name: "foo"
       });
     });

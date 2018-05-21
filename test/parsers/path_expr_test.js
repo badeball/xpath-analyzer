@@ -1,18 +1,16 @@
-"use strict";
+import Assert from "assert";
 
-var Assert = require("assert");
+import XPathLexer from "xpath-lexer";
 
-var XPathLexer = require("xpath-lexer");
+import { CHILD, DESCENDANT_OR_SELF } from "../../lib/axis_specifier";
 
-var AxisSpecifier = require("../../lib/axis_specifier");
+import { FUNCTION_CALL, PATH } from "../../lib/expr_type";
 
-var ExprType = require("../../lib/expr_type");
+import { NODE } from "../../lib/node_type";
 
-var NodeType = require("../../lib/node_type");
+import * as Expr from "../../lib/parsers/expr";
 
-var Expr = require("../../lib/parsers/expr");
-
-var PathExpr = require("../../lib/parsers/path_expr");
+import * as PathExpr from "../../lib/parsers/path_expr";
 
 describe("PathExpr", function () {
   describe("parse()", function () {
@@ -20,18 +18,18 @@ describe("PathExpr", function () {
       var ast = PathExpr.parse(Expr, new XPathLexer("id()//foo"));
 
       Assert.deepEqual(ast, {
-        type: ExprType.PATH,
+        type: PATH,
         filter: {
-          type: ExprType.FUNCTION_CALL,
+          type: FUNCTION_CALL,
           name: "id"
         },
         steps: [{
-          axis: AxisSpecifier.DESCENDANT_OR_SELF,
+          axis: DESCENDANT_OR_SELF,
           test: {
-            type: NodeType.NODE
+            type: NODE
           }
         }, {
-          axis: AxisSpecifier.CHILD,
+          axis: CHILD,
           test: {
             name: "foo"
           }

@@ -1,14 +1,12 @@
-"use strict";
+import Assert from "assert";
 
-var Assert = require("assert");
+import XPathLexer from "xpath-lexer";
 
-var XPathLexer = require("xpath-lexer");
+import { GREATER_THAN, GREATER_THAN_OR_EQUAL, LESS_THAN, LESS_THAN_OR_EQUAL, NUMBER } from "../../lib/expr_type";
 
-var ExprType = require("../../lib/expr_type");
+import * as Expr from "../../lib/parsers/expr";
 
-var Expr = require("../../lib/parsers/expr");
-
-var RelationalExpr = require("../../lib/parsers/relational_expr");
+import * as RelationalExpr from "../../lib/parsers/relational_expr";
 
 describe("RelationalExpr", function () {
   describe("parse()", function () {
@@ -16,13 +14,13 @@ describe("RelationalExpr", function () {
       var ast = RelationalExpr.parse(Expr, new XPathLexer("1 < 2"));
 
       Assert.deepEqual(ast, {
-        type: ExprType.LESS_THAN,
+        type: LESS_THAN,
         lhs: {
-          type: ExprType.NUMBER,
+          type: NUMBER,
           number: 1
         },
         rhs: {
-          type: ExprType.NUMBER,
+          type: NUMBER,
           number: 2
         }
       });
@@ -32,13 +30,13 @@ describe("RelationalExpr", function () {
       var ast = RelationalExpr.parse(Expr, new XPathLexer("1 > 2"));
 
       Assert.deepEqual(ast, {
-        type: ExprType.GREATER_THAN,
+        type: GREATER_THAN,
         lhs: {
-          type: ExprType.NUMBER,
+          type: NUMBER,
           number: 1
         },
         rhs: {
-          type: ExprType.NUMBER,
+          type: NUMBER,
           number: 2
         }
       });
@@ -48,13 +46,13 @@ describe("RelationalExpr", function () {
       var ast = RelationalExpr.parse(Expr, new XPathLexer("1 <= 2"));
 
       Assert.deepEqual(ast, {
-        type: ExprType.LESS_THAN_OR_EQUAL,
+        type: LESS_THAN_OR_EQUAL,
         lhs: {
-          type: ExprType.NUMBER,
+          type: NUMBER,
           number: 1
         },
         rhs: {
-          type: ExprType.NUMBER,
+          type: NUMBER,
           number: 2
         }
       });
@@ -64,13 +62,13 @@ describe("RelationalExpr", function () {
       var ast = RelationalExpr.parse(Expr, new XPathLexer("1 >= 2"));
 
       Assert.deepEqual(ast, {
-        type: ExprType.GREATER_THAN_OR_EQUAL,
+        type: GREATER_THAN_OR_EQUAL,
         lhs: {
-          type: ExprType.NUMBER,
+          type: NUMBER,
           number: 1
         },
         rhs: {
-          type: ExprType.NUMBER,
+          type: NUMBER,
           number: 2
         }
       });

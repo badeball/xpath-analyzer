@@ -1,14 +1,12 @@
-"use strict";
+import Assert from "assert";
 
-var Assert = require("assert");
+import XPathLexer from "xpath-lexer";
 
-var XPathLexer = require("xpath-lexer");
+import { ADDITIVE, NUMBER, SUBTRACTIVE } from "../../lib/expr_type";
 
-var ExprType = require("../../lib/expr_type");
+import * as Expr from "../../lib/parsers/expr";
 
-var Expr = require("../../lib/parsers/expr");
-
-var AdditiveExpr = require("../../lib/parsers/additive_expr");
+import * as AdditiveExpr from "../../lib/parsers/additive_expr";
 
 describe("AdditiveExpr", function () {
   describe("parse()", function () {
@@ -16,13 +14,13 @@ describe("AdditiveExpr", function () {
       var ast = AdditiveExpr.parse(Expr, new XPathLexer("1 + 2"));
 
       Assert.deepEqual(ast, {
-        type: ExprType.ADDITIVE,
+        type: ADDITIVE,
         lhs: {
-          type: ExprType.NUMBER,
+          type: NUMBER,
           number: 1
         },
         rhs: {
-          type: ExprType.NUMBER,
+          type: NUMBER,
           number: 2
         }
       });
@@ -32,13 +30,13 @@ describe("AdditiveExpr", function () {
       var ast = AdditiveExpr.parse(Expr, new XPathLexer("1 - 2"));
 
       Assert.deepEqual(ast, {
-        type: ExprType.SUBTRACTIVE,
+        type: SUBTRACTIVE,
         lhs: {
-          type: ExprType.NUMBER,
+          type: NUMBER,
           number: 1
         },
         rhs: {
-          type: ExprType.NUMBER,
+          type: NUMBER,
           number: 2
         }
       });

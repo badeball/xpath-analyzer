@@ -1,14 +1,12 @@
-"use strict";
+import Assert from "assert";
 
-var Assert = require("assert");
+import XPathLexer from "xpath-lexer";
 
-var XPathLexer = require("xpath-lexer");
+import { FUNCTION_CALL, LITERAL, NUMBER } from "../../lib/expr_type";
 
-var ExprType = require("../../lib/expr_type");
+import * as Expr from "../../lib/parsers/expr";
 
-var Expr = require("../../lib/parsers/expr");
-
-var PrimaryExpr = require("../../lib/parsers/primary_expr");
+import * as PrimaryExpr from "../../lib/parsers/primary_expr";
 
 describe("PrimaryExpr", function () {
   describe("parse()", function () {
@@ -16,7 +14,7 @@ describe("PrimaryExpr", function () {
       var ast = PrimaryExpr.parse(Expr, new XPathLexer("123"));
 
       Assert.deepEqual(ast, {
-        type: ExprType.NUMBER,
+        type: NUMBER,
         number: 123
       });
     });
@@ -25,7 +23,7 @@ describe("PrimaryExpr", function () {
       var ast = PrimaryExpr.parse(Expr, new XPathLexer("123.123"));
 
       Assert.deepEqual(ast, {
-        type: ExprType.NUMBER,
+        type: NUMBER,
         number: 123.123
       });
     });
@@ -34,7 +32,7 @@ describe("PrimaryExpr", function () {
       var ast = PrimaryExpr.parse(Expr, new XPathLexer("'foo'"));
 
       Assert.deepEqual(ast, {
-        type: ExprType.LITERAL,
+        type: LITERAL,
         string: "foo"
       });
     });
@@ -43,7 +41,7 @@ describe("PrimaryExpr", function () {
       var ast = PrimaryExpr.parse(Expr, new XPathLexer("('foo')"));
 
       Assert.deepEqual(ast, {
-        type: ExprType.LITERAL,
+        type: LITERAL,
         string: "foo"
       });
     });
@@ -52,7 +50,7 @@ describe("PrimaryExpr", function () {
       var ast = PrimaryExpr.parse(Expr, new XPathLexer("id()"));
 
       Assert.deepEqual(ast, {
-        type: ExprType.FUNCTION_CALL,
+        type: FUNCTION_CALL,
         name: "id"
       });
     });

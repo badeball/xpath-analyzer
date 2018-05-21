@@ -1,14 +1,12 @@
-"use strict";
+import Assert from "assert";
 
-var Assert = require("assert");
+import XPathLexer from "xpath-lexer";
 
-var XPathLexer = require("xpath-lexer");
+import { DIVISIONAL, MODULUS, MULTIPLICATIVE, NUMBER } from "../../lib/expr_type";
 
-var ExprType = require("../../lib/expr_type");
+import * as Expr from "../../lib/parsers/expr";
 
-var Expr = require("../../lib/parsers/expr");
-
-var MultiplicativeExpr = require("../../lib/parsers/multiplicative_expr");
+import * as MultiplicativeExpr from "../../lib/parsers/multiplicative_expr";
 
 describe("MultiplicativeExpr", function () {
   describe("parse()", function () {
@@ -16,13 +14,13 @@ describe("MultiplicativeExpr", function () {
       var ast = MultiplicativeExpr.parse(Expr, new XPathLexer("1 * 2"));
 
       Assert.deepEqual(ast, {
-        type: ExprType.MULTIPLICATIVE,
+        type: MULTIPLICATIVE,
         lhs: {
-          type: ExprType.NUMBER,
+          type: NUMBER,
           number: 1
         },
         rhs: {
-          type: ExprType.NUMBER,
+          type: NUMBER,
           number: 2
         }
       });
@@ -32,13 +30,13 @@ describe("MultiplicativeExpr", function () {
       var ast = MultiplicativeExpr.parse(Expr, new XPathLexer("1 div 2"));
 
       Assert.deepEqual(ast, {
-        type: ExprType.DIVISIONAL,
+        type: DIVISIONAL,
         lhs: {
-          type: ExprType.NUMBER,
+          type: NUMBER,
           number: 1
         },
         rhs: {
-          type: ExprType.NUMBER,
+          type: NUMBER,
           number: 2
         }
       });
@@ -48,13 +46,13 @@ describe("MultiplicativeExpr", function () {
       var ast = MultiplicativeExpr.parse(Expr, new XPathLexer("1 mod 2"));
 
       Assert.deepEqual(ast, {
-        type: ExprType.MODULUS,
+        type: MODULUS,
         lhs: {
-          type: ExprType.NUMBER,
+          type: NUMBER,
           number: 1
         },
         rhs: {
-          type: ExprType.NUMBER,
+          type: NUMBER,
           number: 2
         }
       });

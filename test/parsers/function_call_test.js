@@ -1,14 +1,12 @@
-"use strict";
+import Assert from "assert";
 
-var Assert = require("assert");
+import XPathLexer from "xpath-lexer";
 
-var XPathLexer = require("xpath-lexer");
+import { FUNCTION_CALL, LITERAL } from "../../lib/expr_type";
 
-var ExprType = require("../../lib/expr_type");
+import * as Expr from "../../lib/parsers/expr";
 
-var Expr = require("../../lib/parsers/expr");
-
-var FunctionCall = require("../../lib/parsers/function_call");
+import * as FunctionCall from "../../lib/parsers/function_call";
 
 describe("FunctionCall", function () {
   describe("parse()", function () {
@@ -16,10 +14,10 @@ describe("FunctionCall", function () {
       var ast = FunctionCall.parse(Expr, new XPathLexer("id('foo')"));
 
       Assert.deepEqual(ast, {
-        type: ExprType.FUNCTION_CALL,
+        type: FUNCTION_CALL,
         name: "id",
         args: [{
-          type: ExprType.LITERAL,
+          type: LITERAL,
           string: "foo"
         }]
       });
@@ -29,13 +27,13 @@ describe("FunctionCall", function () {
       var ast = FunctionCall.parse(Expr, new XPathLexer("id('foo', 'bar')"));
 
       Assert.deepEqual(ast, {
-        type: ExprType.FUNCTION_CALL,
+        type: FUNCTION_CALL,
         name: "id",
         args: [{
-          type: ExprType.LITERAL,
+          type: LITERAL,
           string: "foo"
         }, {
-          type: ExprType.LITERAL,
+          type: LITERAL,
           string: "bar"
         }]
       });

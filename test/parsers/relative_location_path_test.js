@@ -1,18 +1,16 @@
-"use strict";
+import Assert from "assert";
 
-var Assert = require("assert");
+import XPathLexer from "xpath-lexer";
 
-var XPathLexer = require("xpath-lexer");
+import { CHILD, DESCENDANT_OR_SELF } from "../../lib/axis_specifier";
 
-var AxisSpecifier = require("../../lib/axis_specifier");
+import { RELATIVE_LOCATION_PATH } from "../../lib/expr_type";
 
-var ExprType = require("../../lib/expr_type");
+import { NODE } from "../../lib/node_type";
 
-var NodeType = require("../../lib/node_type");
+import * as Expr from "../../lib/parsers/expr";
 
-var Expr = require("../../lib/parsers/expr");
-
-var RelativeLocationPathExpr = require("../../lib/parsers/relative_location_path");
+import * as RelativeLocationPathExpr from "../../lib/parsers/relative_location_path";
 
 describe("RelativeLocationPathExpr", function () {
   describe("parse()", function () {
@@ -20,19 +18,19 @@ describe("RelativeLocationPathExpr", function () {
       var ast = RelativeLocationPathExpr.parse(Expr, new XPathLexer("bar//foo"));
 
       Assert.deepEqual(ast, {
-        type: ExprType.RELATIVE_LOCATION_PATH,
+        type: RELATIVE_LOCATION_PATH,
         steps: [{
-          axis: AxisSpecifier.CHILD,
+          axis: CHILD,
           test: {
             name: "bar"
           }
         }, {
-          axis: AxisSpecifier.DESCENDANT_OR_SELF,
+          axis: DESCENDANT_OR_SELF,
           test: {
-            type: NodeType.NODE
+            type: NODE
           }
         }, {
-          axis: AxisSpecifier.CHILD,
+          axis: CHILD,
           test: {
             name: "foo"
           }

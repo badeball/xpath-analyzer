@@ -1,14 +1,12 @@
-"use strict";
+import Assert from "assert";
 
-var Assert = require("assert");
+import XPathAnalyzer from "../lib/xpath_analyzer";
 
-var XPathAnalyzer = require("../lib/xpath_analyzer");
+import { CHILD, DESCENDANT_OR_SELF, FOLLOWING } from "../lib/axis_specifier";
 
-var AxisSpecifier = require("../lib/axis_specifier");
+import { EQUALITY, FUNCTION_CALL, LITERAL, NUMBER, OR, PATH, RELATIVE_LOCATION_PATH } from "../lib/expr_type";
 
-var ExprType = require("../lib/expr_type");
-
-var NodeType = require("../lib/node_type");
+import { NODE } from "../lib/node_type";
 
 function itShouldThrowUponExpression (expression, message) {
   describe("when given the erroneous expression \"" + expression + "\"", function () {
@@ -36,41 +34,41 @@ describe("XPathAnalyzer", function () {
       var ast = new XPathAnalyzer(expression).parse();
 
       Assert.deepEqual(ast, {
-        type: ExprType.PATH,
+        type: PATH,
         filter: {
-          type: ExprType.FUNCTION_CALL,
+          type: FUNCTION_CALL,
           name: "id",
           args: [{
-            type: ExprType.LITERAL,
+            type: LITERAL,
             string: "foo"
           }]
         },
         steps: [{
-          axis: AxisSpecifier.DESCENDANT_OR_SELF,
+          axis: DESCENDANT_OR_SELF,
           test: {
-            type: NodeType.NODE
+            type: NODE
           }
         }, {
-          axis: AxisSpecifier.FOLLOWING,
+          axis: FOLLOWING,
           test: {
             name: "foo"
           },
           predicates: [{
-            type: ExprType.OR,
+            type: OR,
             lhs: {
-              type: ExprType.EQUALITY,
+              type: EQUALITY,
               lhs: {
-                type: ExprType.FUNCTION_CALL,
+                type: FUNCTION_CALL,
                 name: "count",
                 args: [{
-                  type: ExprType.RELATIVE_LOCATION_PATH,
+                  type: RELATIVE_LOCATION_PATH,
                   steps: [{
-                    axis: AxisSpecifier.CHILD,
+                    axis: CHILD,
                     test: {
                       name: "bar"
                     }
                   }, {
-                    axis: AxisSpecifier.CHILD,
+                    axis: CHILD,
                     test: {
                       name: "baz"
                     }
@@ -78,12 +76,12 @@ describe("XPathAnalyzer", function () {
                 }]
               },
               rhs: {
-                type: ExprType.NUMBER,
+                type: NUMBER,
                 number: 1
               }
             },
             rhs: {
-              type: ExprType.NUMBER,
+              type: NUMBER,
               number: 5
             }
           }]

@@ -1,14 +1,12 @@
-"use strict";
+import Assert from "assert";
 
-var Assert = require("assert");
+import XPathLexer from "xpath-lexer";
 
-var XPathLexer = require("xpath-lexer");
+import { EQUALITY, INEQUALITY, NUMBER } from "../../lib/expr_type";
 
-var ExprType = require("../../lib/expr_type");
+import * as Expr from "../../lib/parsers/expr";
 
-var Expr = require("../../lib/parsers/expr");
-
-var EqualityExpr = require("../../lib/parsers/equality_expr");
+import * as EqualityExpr from "../../lib/parsers/equality_expr";
 
 describe("EqualityExpr", function () {
   describe("parse()", function () {
@@ -16,13 +14,13 @@ describe("EqualityExpr", function () {
       var ast = EqualityExpr.parse(Expr, new XPathLexer("1 = 2"));
 
       Assert.deepEqual(ast, {
-        type: ExprType.EQUALITY,
+        type: EQUALITY,
         lhs: {
-          type: ExprType.NUMBER,
+          type: NUMBER,
           number: 1
         },
         rhs: {
-          type: ExprType.NUMBER,
+          type: NUMBER,
           number: 2
         }
       });
@@ -32,13 +30,13 @@ describe("EqualityExpr", function () {
       var ast = EqualityExpr.parse(Expr, new XPathLexer("1 != 2"));
 
       Assert.deepEqual(ast, {
-        type: ExprType.INEQUALITY,
+        type: INEQUALITY,
         lhs: {
-          type: ExprType.NUMBER,
+          type: NUMBER,
           number: 1
         },
         rhs: {
-          type: ExprType.NUMBER,
+          type: NUMBER,
           number: 2
         }
       });
