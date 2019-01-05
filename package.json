@@ -9,6 +9,9 @@
     "type": "git",
     "url": "git://github.com/badeball/xpath-analyzer.git"
   },
+  "scripts": {
+    "prepublishOnly": "make ensure-built"
+  },
   "dependencies": {
     "xpath-lexer": "^1.2.1-rc1"
   },
