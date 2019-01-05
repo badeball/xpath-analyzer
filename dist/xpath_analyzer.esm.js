@@ -80,7 +80,13 @@ function parse (rootParser, lexer) {
 }
 
 function isValid (type) {
-  return NODE_TYPES.includes(type);
+  for (var i = 0; i < NODE_TYPES.length; i++) {
+    if (NODE_TYPES[i] === type) {
+      return true;
+    }
+  }
+
+  return false;
 }
 
 function parse$1 (rootParser, lexer) {
@@ -193,7 +199,13 @@ function isValidOp$1 (lexer) {
 }
 
 function isValid$1 (specifier) {
-  return AXES.includes(specifier);
+  for (var i = 0; i < AXES.length; i++) {
+    if (AXES[i] === specifier) {
+      return true;
+    }
+  }
+
+  return false;
 }
 
 function parse$4 (rootParser, lexer) {
