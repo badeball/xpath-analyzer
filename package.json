@@ -1,6 +1,6 @@
 {
   "name": "xpath-analyzer",
-  "version": "2.0.0-rc3",
+  "version": "2.0.0",
   "description": "An analyzer / parser for XPath 1.0 expressions.",
   "main": "dist/xpath_analyzer.cjs.js",
   "module": "dist/xpath_analyzer.esm.js",
@@ -13,7 +13,7 @@
     "prepublishOnly": "make ensure-built"
   },
   "dependencies": {
-    "xpath-lexer": "^1.2.1-rc1"
+    "xpath-lexer": "^1.2.1"
   },
   "devDependencies": {
     "codeclimate-test-reporter": "^0.5.1",
