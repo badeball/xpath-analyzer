@@ -1,6 +1,7 @@
 MOCHA := ./node_modules/.bin/_mocha
 NYC := ./node_modules/.bin/nyc
 ROLLUP := ./node_modules/.bin/rollup
+DTS := ./node_modules/.bin/dts-bundle-generator
 
 all: test
 
@@ -11,14 +12,15 @@ lint:
 	false
 
 test:
-	$(MOCHA) --require esm --recursive --reporter dot
+	$(MOCHA) --require ts-node/register --recursive --reporter dot "test/**/*_test.ts"
 
 test-cover:
-	$(NYC) --temp-directory coverage/ --require esm $(MOCHA) --recursive --reporter dot
+	$(NYC) --temp-directory coverage/ --require ts-node/register --extension .ts $(MOCHA) --recursive --reporter dot "test/**/*_test.ts"
 	$(NYC) --temp-directory coverage/ report --reporter text-lcov > coverage.lcov
 
 build:
 	$(ROLLUP) --config
+	$(DTS) -o dist/xpath_analyzer.d.ts lib/xpath_analyzer.ts
 
 ensure-built: build
 	[ -z "$(shell git status -s dist/)" ]

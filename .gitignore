@@ -1,3 +1,4 @@
 .nyc_output/
 coverage.lcov
 coverage/
+.rpt2_cache/
