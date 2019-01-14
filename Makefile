@@ -8,20 +8,20 @@ all: lint test
 ci: ensure-built lint test-cover
 
 lint:
-	@$(ESLINT) .
+	$(ESLINT) .
 
 test:
-	@$(MOCHA) --require esm --recursive --reporter dot
+	$(MOCHA) --require esm --recursive --reporter dot
 
 test-cover:
-	@$(NYC) --temp-directory coverage/ --require esm $(MOCHA) --recursive --reporter dot
-	@$(NYC) --temp-directory coverage/ report --reporter text-lcov > coverage.lcov
+	$(NYC) --temp-directory coverage/ --require esm $(MOCHA) --recursive --reporter dot
+	$(NYC) --temp-directory coverage/ report --reporter text-lcov > coverage.lcov
 
 build:
-	@$(ROLLUP) --external xpath-lexer --format cjs --file dist/xpath_analyzer.cjs.js --output.exports named lib/xpath_analyzer.js
-	@$(ROLLUP) --external xpath-lexer --format es --file dist/xpath_analyzer.esm.js lib/xpath_analyzer.js
+	$(ROLLUP) --external xpath-lexer --format cjs --file dist/xpath_analyzer.cjs.js --output.exports named lib/xpath_analyzer.js
+	$(ROLLUP) --external xpath-lexer --format es --file dist/xpath_analyzer.esm.js lib/xpath_analyzer.js
 
 ensure-built: build
-	@[ -z "$(shell git status -s dist/)" ]
+	[ -z "$(shell git status -s dist/)" ]
 
 .PHONY: lint test test-cover build ensure-built
