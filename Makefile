@@ -1,14 +1,14 @@
 MOCHA := ./node_modules/.bin/_mocha
-ESLINT := ./node_modules/.bin/eslint
 NYC := ./node_modules/.bin/nyc
 ROLLUP := ./node_modules/.bin/rollup
 
-all: lint test
+all: test
 
-ci: ensure-built lint test-cover
+ci: ensure-built test-cover
 
 lint:
-	$(ESLINT) .
+	echo "Not yet implemented"
+	false
 
 test:
 	$(MOCHA) --require esm --recursive --reporter dot
@@ -23,4 +23,4 @@ build:
 ensure-built: build
 	[ -z "$(shell git status -s dist/)" ]
 
-.PHONY: lint test test-cover build ensure-built
+.PHONY: test test-cover build ensure-built
