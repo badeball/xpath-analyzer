@@ -583,19 +583,21 @@ function parse$i (lexer) {
   return parse$h({ parse: parse$i }, lexer);
 }
 
-function XPathAnalyzer (expression) {
-  this.lexer = new XPathLexer(expression);
-}
-
-XPathAnalyzer.prototype.parse = function () {
-  var ast = parse$i(this.lexer);
-
-  if (this.lexer.empty()) {
-    return ast;
-  } else {
-    throw new Error("Unexpected token at position " + this.lexer.position());
+class XPathAnalyzer {
+  constructor(expression) {
+    this.lexer = new XPathLexer(expression);
   }
-};
+
+  parse() {
+    var ast = parse$i(this.lexer);
+
+    if (this.lexer.empty()) {
+      return ast;
+    } else {
+      throw new Error("Unexpected token at position " + this.lexer.position());
+    }
+  }
+}
 
 exports.default = XPathAnalyzer;
 exports.ANCESTOR = ANCESTOR;

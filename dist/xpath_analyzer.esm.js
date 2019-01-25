@@ -577,19 +577,21 @@ function parse$i (lexer) {
   return parse$h({ parse: parse$i }, lexer);
 }
 
-function XPathAnalyzer (expression) {
-  this.lexer = new XPathLexer(expression);
-}
-
-XPathAnalyzer.prototype.parse = function () {
-  var ast = parse$i(this.lexer);
-
-  if (this.lexer.empty()) {
-    return ast;
-  } else {
-    throw new Error("Unexpected token at position " + this.lexer.position());
+class XPathAnalyzer {
+  constructor(expression) {
+    this.lexer = new XPathLexer(expression);
   }
-};
+
+  parse() {
+    var ast = parse$i(this.lexer);
+
+    if (this.lexer.empty()) {
+      return ast;
+    } else {
+      throw new Error("Unexpected token at position " + this.lexer.position());
+    }
+  }
+}
 
 export default XPathAnalyzer;
 export { ANCESTOR, ANCESTOR_OR_SELF, ATTRIBUTE, CHILD, DESCENDANT, DESCENDANT_OR_SELF, FOLLOWING, FOLLOWING_SIBLING, NAMESPACE, PARENT, PRECEDING, PRECEDING_SIBLING, SELF, AXES, ABSOLUTE_LOCATION_PATH, ADDITIVE, AND, DIVISIONAL, EQUALITY, FILTER, FUNCTION_CALL, GREATER_THAN, GREATER_THAN_OR_EQUAL, INEQUALITY, LESS_THAN, LESS_THAN_OR_EQUAL, LITERAL, MODULUS, MULTIPLICATIVE, NEGATION, NUMBER, OR, PATH, RELATIVE_LOCATION_PATH, SUBTRACTIVE, UNION, COMMENT, NODE, PROCESSING_INSTRUCTION, TEXT, NODE_TYPES };
