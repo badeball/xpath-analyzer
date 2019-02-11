@@ -37,33 +37,10 @@ var PRECEDING = "preceding";
 var PRECEDING_SIBLING = "preceding-sibling";
 var SELF = "self";
 
-var AXES = [
-  ANCESTOR,
-  ANCESTOR_OR_SELF,
-  ATTRIBUTE,
-  CHILD,
-  DESCENDANT,
-  DESCENDANT_OR_SELF,
-  FOLLOWING,
-  FOLLOWING_SIBLING,
-  NAMESPACE,
-  PARENT,
-  PRECEDING,
-  PRECEDING_SIBLING,
-  SELF
-];
-
 var COMMENT = "comment";
 var NODE = "node";
 var PROCESSING_INSTRUCTION = "processing-instruction";
 var TEXT = "text";
-
-var NODE_TYPES = [
-  COMMENT,
-  NODE,
-  PROCESSING_INSTRUCTION,
-  TEXT
-];
 
 function parse (rootParser, lexer) {
   lexer.next();
@@ -80,13 +57,10 @@ function parse (rootParser, lexer) {
 }
 
 function isValid (type) {
-  for (var i = 0; i < NODE_TYPES.length; i++) {
-    if (NODE_TYPES[i] === type) {
-      return true;
-    }
-  }
-
-  return false;
+  return type == COMMENT ||
+    type == NODE ||
+    type == PROCESSING_INSTRUCTION ||
+    type == TEXT;
 }
 
 function parse$1 (rootParser, lexer) {
@@ -199,13 +173,19 @@ function isValidOp$1 (lexer) {
 }
 
 function isValid$1 (specifier) {
-  for (var i = 0; i < AXES.length; i++) {
-    if (AXES[i] === specifier) {
-      return true;
-    }
-  }
-
-  return false;
+  return specifier == ANCESTOR ||
+    specifier == ANCESTOR_OR_SELF ||
+    specifier == ATTRIBUTE ||
+    specifier == CHILD ||
+    specifier == DESCENDANT ||
+    specifier == DESCENDANT_OR_SELF ||
+    specifier == FOLLOWING ||
+    specifier == FOLLOWING_SIBLING ||
+    specifier == NAMESPACE ||
+    specifier == PARENT ||
+    specifier == PRECEDING ||
+    specifier == PRECEDING_SIBLING ||
+    specifier == SELF;
 }
 
 function parse$4 (rootParser, lexer) {
@@ -594,4 +574,4 @@ class XPathAnalyzer {
 }
 
 export default XPathAnalyzer;
-export { ANCESTOR, ANCESTOR_OR_SELF, ATTRIBUTE, CHILD, DESCENDANT, DESCENDANT_OR_SELF, FOLLOWING, FOLLOWING_SIBLING, NAMESPACE, PARENT, PRECEDING, PRECEDING_SIBLING, SELF, AXES, ABSOLUTE_LOCATION_PATH, ADDITIVE, AND, DIVISIONAL, EQUALITY, FILTER, FUNCTION_CALL, GREATER_THAN, GREATER_THAN_OR_EQUAL, INEQUALITY, LESS_THAN, LESS_THAN_OR_EQUAL, LITERAL, MODULUS, MULTIPLICATIVE, NEGATION, NUMBER, OR, PATH, RELATIVE_LOCATION_PATH, SUBTRACTIVE, UNION, COMMENT, NODE, PROCESSING_INSTRUCTION, TEXT, NODE_TYPES };
+export { ANCESTOR, ANCESTOR_OR_SELF, ATTRIBUTE, CHILD, DESCENDANT, DESCENDANT_OR_SELF, FOLLOWING, FOLLOWING_SIBLING, NAMESPACE, PARENT, PRECEDING, PRECEDING_SIBLING, SELF, ABSOLUTE_LOCATION_PATH, ADDITIVE, AND, DIVISIONAL, EQUALITY, FILTER, FUNCTION_CALL, GREATER_THAN, GREATER_THAN_OR_EQUAL, INEQUALITY, LESS_THAN, LESS_THAN_OR_EQUAL, LITERAL, MODULUS, MULTIPLICATIVE, NEGATION, NUMBER, OR, PATH, RELATIVE_LOCATION_PATH, SUBTRACTIVE, UNION, COMMENT, NODE, PROCESSING_INSTRUCTION, TEXT };

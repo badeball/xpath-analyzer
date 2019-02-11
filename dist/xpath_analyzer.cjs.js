@@ -43,33 +43,10 @@ var PRECEDING = "preceding";
 var PRECEDING_SIBLING = "preceding-sibling";
 var SELF = "self";
 
-var AXES = [
-  ANCESTOR,
-  ANCESTOR_OR_SELF,
-  ATTRIBUTE,
-  CHILD,
-  DESCENDANT,
-  DESCENDANT_OR_SELF,
-  FOLLOWING,
-  FOLLOWING_SIBLING,
-  NAMESPACE,
-  PARENT,
-  PRECEDING,
-  PRECEDING_SIBLING,
-  SELF
-];
-
 var COMMENT = "comment";
 var NODE = "node";
 var PROCESSING_INSTRUCTION = "processing-instruction";
 var TEXT = "text";
-
-var NODE_TYPES = [
-  COMMENT,
-  NODE,
-  PROCESSING_INSTRUCTION,
-  TEXT
-];
 
 function parse (rootParser, lexer) {
   lexer.next();
@@ -86,13 +63,10 @@ function parse (rootParser, lexer) {
 }
 
 function isValid (type) {
-  for (var i = 0; i < NODE_TYPES.length; i++) {
-    if (NODE_TYPES[i] === type) {
-      return true;
-    }
-  }
-
-  return false;
+  return type == COMMENT ||
+    type == NODE ||
+    type == PROCESSING_INSTRUCTION ||
+    type == TEXT;
 }
 
 function parse$1 (rootParser, lexer) {
@@ -205,13 +179,19 @@ function isValidOp$1 (lexer) {
 }
 
 function isValid$1 (specifier) {
-  for (var i = 0; i < AXES.length; i++) {
-    if (AXES[i] === specifier) {
-      return true;
-    }
-  }
-
-  return false;
+  return specifier == ANCESTOR ||
+    specifier == ANCESTOR_OR_SELF ||
+    specifier == ATTRIBUTE ||
+    specifier == CHILD ||
+    specifier == DESCENDANT ||
+    specifier == DESCENDANT_OR_SELF ||
+    specifier == FOLLOWING ||
+    specifier == FOLLOWING_SIBLING ||
+    specifier == NAMESPACE ||
+    specifier == PARENT ||
+    specifier == PRECEDING ||
+    specifier == PRECEDING_SIBLING ||
+    specifier == SELF;
 }
 
 function parse$4 (rootParser, lexer) {
@@ -613,7 +593,6 @@ exports.PARENT = PARENT;
 exports.PRECEDING = PRECEDING;
 exports.PRECEDING_SIBLING = PRECEDING_SIBLING;
 exports.SELF = SELF;
-exports.AXES = AXES;
 exports.ABSOLUTE_LOCATION_PATH = ABSOLUTE_LOCATION_PATH;
 exports.ADDITIVE = ADDITIVE;
 exports.AND = AND;
@@ -640,4 +619,3 @@ exports.COMMENT = COMMENT;
 exports.NODE = NODE;
 exports.PROCESSING_INSTRUCTION = PROCESSING_INSTRUCTION;
 exports.TEXT = TEXT;
-exports.NODE_TYPES = NODE_TYPES;
