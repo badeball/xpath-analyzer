@@ -4,7 +4,7 @@ import XPathLexer from "xpath-lexer";
 
 import { ATTRIBUTE, CHILD, PARENT, SELF } from "../../lib/axis_specifier";
 
-import { NUMBER } from "../../lib/expr_type";
+import { NUMBER, NODE_NAME_TEST, NODE_TYPE_TEST } from "../../lib/expr_type";
 
 import { NODE } from "../../lib/node_type";
 
@@ -20,6 +20,7 @@ describe("Step", function () {
       Assert.deepEqual(ast, {
         axis: CHILD,
         test: {
+          type: NODE_NAME_TEST,
           name: "foo"
         }
       });
@@ -31,6 +32,7 @@ describe("Step", function () {
       Assert.deepEqual(ast, {
         axis: PARENT,
         test: {
+          type: NODE_NAME_TEST,
           name: "foo"
         }
       });
@@ -48,6 +50,7 @@ describe("Step", function () {
       Assert.deepEqual(ast, {
         axis: ATTRIBUTE,
         test: {
+          type: NODE_NAME_TEST,
           name: "foo"
         }
       });
@@ -59,7 +62,8 @@ describe("Step", function () {
       Assert.deepEqual(ast, {
         axis: PARENT,
         test: {
-          type: NODE
+          type: NODE_TYPE_TEST,
+          name: NODE
         }
       });
     });
@@ -70,7 +74,8 @@ describe("Step", function () {
       Assert.deepEqual(ast, {
         axis: SELF,
         test: {
-          type: NODE
+          type: NODE_TYPE_TEST,
+          name: NODE
         }
       });
     });
@@ -81,6 +86,7 @@ describe("Step", function () {
       Assert.deepEqual(ast, {
         axis: CHILD,
         test: {
+          type: NODE_NAME_TEST,
           name: "*"
         },
         predicates: [{

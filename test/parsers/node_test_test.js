@@ -2,7 +2,9 @@ import Assert from "assert";
 
 import XPathLexer from "xpath-lexer";
 
-import { PROCESSING_INSTRUCTION, TEXT } from "../../lib/node_type";
+import { NODE_NAME_TEST, NODE_TYPE_TEST, PROCESSING_INSTRUCTION_TEST } from "../../lib/expr_type";
+
+import { TEXT } from "../../lib/node_type";
 
 import * as Expr from "../../lib/parsers/expr";
 
@@ -14,6 +16,7 @@ describe("NodeTest", function () {
       var ast = NodeTest.parse(Expr, new XPathLexer("foo"));
 
       Assert.deepEqual(ast, {
+        type: NODE_NAME_TEST,
         name: "foo"
       });
     });
@@ -22,6 +25,7 @@ describe("NodeTest", function () {
       var ast = NodeTest.parse(Expr, new XPathLexer("*"));
 
       Assert.deepEqual(ast, {
+        type: NODE_NAME_TEST,
         name: "*"
       });
     });
@@ -30,7 +34,8 @@ describe("NodeTest", function () {
       var ast = NodeTest.parse(Expr, new XPathLexer("text()"));
 
       Assert.deepEqual(ast, {
-        type: TEXT
+        type: NODE_TYPE_TEST,
+        name: TEXT
       });
     });
 
@@ -38,7 +43,7 @@ describe("NodeTest", function () {
       var ast = NodeTest.parse(Expr, new XPathLexer("processing-instruction('foo')"));
 
       Assert.deepEqual(ast, {
-        type: PROCESSING_INSTRUCTION,
+        type: PROCESSING_INSTRUCTION_TEST,
         name: "foo"
       });
     });

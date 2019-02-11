@@ -28,6 +28,9 @@ const PATH = "path";
 const RELATIVE_LOCATION_PATH = "relative-location-path";
 const SUBTRACTIVE = "subtractive";
 const UNION = "union";
+const NODE_NAME_TEST = "node-name-test";
+const NODE_TYPE_TEST = "node-type-test";
+const PROCESSING_INSTRUCTION_TEST = "processing-instruction-test";
 
 const ANCESTOR = "ancestor";
 const ANCESTOR_OR_SELF = "ancestor-or-self";
@@ -199,25 +202,30 @@ function parse$4 (rootParser, lexer) {
     lexer.next();
 
     return {
+      type: NODE_NAME_TEST,
       name: "*"
     };
   }
 
   if (lexer.peak(1) === "(") {
     if (isValid(lexer.peak())) {
-      var test = {
-        type: lexer.next()
-      };
+      var test, type = lexer.next();
 
       lexer.next();
 
-      if (test.type === PROCESSING_INSTRUCTION) {
+      if (type === PROCESSING_INSTRUCTION) {
         var token = lexer.peak(),
             ch = token && token[0];
 
-        if (ch === "\"" || ch === "'") {
-          test.name = lexer.next().slice(1, -1);
-        }
+        test = {
+          type: PROCESSING_INSTRUCTION_TEST,
+          name: (ch === "\"" || ch === "'") ? lexer.next().slice(1, -1) : undefined
+        };
+      } else {
+        test = {
+          type: NODE_TYPE_TEST,
+          name: type
+        };
       }
 
       if (lexer.peak() !== ")") {
@@ -233,6 +241,7 @@ function parse$4 (rootParser, lexer) {
   }
 
   return {
+    type: NODE_NAME_TEST,
     name: lexer.next()
   };
 }
@@ -258,7 +267,8 @@ function parse$5 (rootParser, lexer) {
     return {
       axis: PARENT,
       test: {
-        type: NODE
+        type: NODE_TYPE_TEST,
+        name: NODE
       }
     };
   } else if (lexer.peak() === ".") {
@@ -267,7 +277,8 @@ function parse$5 (rootParser, lexer) {
     return {
       axis: SELF,
       test: {
-        type: NODE
+        type: NODE_TYPE_TEST,
+        name: NODE
       }
     };
   } else {
@@ -319,7 +330,8 @@ function parse$6 (rootParser, lexer) {
       absoluteLocation.steps.push({
         axis: DESCENDANT_OR_SELF,
         test: {
-          type: NODE
+          type: NODE_TYPE_TEST,
+          name: NODE
         }
       });
 
@@ -342,7 +354,8 @@ function parse$7 (rootParser, lexer) {
       relativeLocation.steps.push({
         axis: DESCENDANT_OR_SELF,
         test: {
-          type: NODE
+          type: NODE_TYPE_TEST,
+          name: NODE
         }
       });
     }
@@ -380,7 +393,8 @@ function parse$9 (rootParser, lexer) {
           path.steps.push({
             axis: DESCENDANT_OR_SELF,
             test: {
-              type: NODE
+              type: NODE_TYPE_TEST,
+              name: NODE
             }
           });
         }
@@ -615,6 +629,9 @@ exports.PATH = PATH;
 exports.RELATIVE_LOCATION_PATH = RELATIVE_LOCATION_PATH;
 exports.SUBTRACTIVE = SUBTRACTIVE;
 exports.UNION = UNION;
+exports.NODE_NAME_TEST = NODE_NAME_TEST;
+exports.NODE_TYPE_TEST = NODE_TYPE_TEST;
+exports.PROCESSING_INSTRUCTION_TEST = PROCESSING_INSTRUCTION_TEST;
 exports.COMMENT = COMMENT;
 exports.NODE = NODE;
 exports.PROCESSING_INSTRUCTION = PROCESSING_INSTRUCTION;

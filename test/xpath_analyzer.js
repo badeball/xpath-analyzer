@@ -4,7 +4,7 @@ import XPathAnalyzer from "../lib/xpath_analyzer";
 
 import { CHILD, DESCENDANT_OR_SELF, FOLLOWING } from "../lib/axis_specifier";
 
-import { EQUALITY, FUNCTION_CALL, LITERAL, NUMBER, OR, PATH, RELATIVE_LOCATION_PATH } from "../lib/expr_type";
+import { EQUALITY, FUNCTION_CALL, LITERAL, NUMBER, OR, PATH, RELATIVE_LOCATION_PATH, NODE_NAME_TEST, NODE_TYPE_TEST } from "../lib/expr_type";
 
 import { NODE } from "../lib/node_type";
 
@@ -46,11 +46,13 @@ describe("XPathAnalyzer", function () {
         steps: [{
           axis: DESCENDANT_OR_SELF,
           test: {
-            type: NODE
+            type: NODE_TYPE_TEST,
+            name: NODE
           }
         }, {
           axis: FOLLOWING,
           test: {
+            type: NODE_NAME_TEST,
             name: "foo"
           },
           predicates: [{
@@ -65,11 +67,13 @@ describe("XPathAnalyzer", function () {
                   steps: [{
                     axis: CHILD,
                     test: {
+                      type: NODE_NAME_TEST,
                       name: "bar"
                     }
                   }, {
                     axis: CHILD,
                     test: {
+                      type: NODE_NAME_TEST,
                       name: "baz"
                     }
                   }]

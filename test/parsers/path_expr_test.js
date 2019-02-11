@@ -4,7 +4,7 @@ import XPathLexer from "xpath-lexer";
 
 import { CHILD, DESCENDANT_OR_SELF } from "../../lib/axis_specifier";
 
-import { FUNCTION_CALL, PATH } from "../../lib/expr_type";
+import { FUNCTION_CALL, PATH, NODE_NAME_TEST, NODE_TYPE_TEST } from "../../lib/expr_type";
 
 import { NODE } from "../../lib/node_type";
 
@@ -26,11 +26,13 @@ describe("PathExpr", function () {
         steps: [{
           axis: DESCENDANT_OR_SELF,
           test: {
-            type: NODE
+            type: NODE_TYPE_TEST,
+            name: NODE
           }
         }, {
           axis: CHILD,
           test: {
+            type: NODE_NAME_TEST,
             name: "foo"
           }
         }]

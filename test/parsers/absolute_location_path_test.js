@@ -4,7 +4,7 @@ import XPathLexer from "xpath-lexer";
 
 import { CHILD, DESCENDANT_OR_SELF } from "../../lib/axis_specifier";
 
-import { ABSOLUTE_LOCATION_PATH } from "../../lib/expr_type";
+import { ABSOLUTE_LOCATION_PATH, NODE_NAME_TEST, NODE_TYPE_TEST } from "../../lib/expr_type";
 
 import { NODE } from "../../lib/node_type";
 
@@ -31,11 +31,13 @@ describe("AbsoluteLocationPathExpr", function () {
         steps: [{
           axis: CHILD,
           test: {
+            type: NODE_NAME_TEST,
             name: "bar"
           }
         }, {
           axis: CHILD,
           test: {
+            type: NODE_NAME_TEST,
             name: "foo"
           }
         }]
@@ -50,16 +52,19 @@ describe("AbsoluteLocationPathExpr", function () {
         steps: [{
           axis: CHILD,
           test: {
+            type: NODE_NAME_TEST,
             name: "bar"
           }
         }, {
           axis: DESCENDANT_OR_SELF,
           test: {
-            type: NODE
+            type: NODE_TYPE_TEST,
+            name: NODE
           }
         }, {
           axis: CHILD,
           test: {
+            type: NODE_NAME_TEST,
             name: "foo"
           }
         }]
