@@ -1,17 +1,13 @@
-import Assert from "assert";
+import * as Assert from "assert";
 
-import XPathLexer from "xpath-lexer";
+import XPathAnalyzer from "../../lib/xpath_analyzer";
 
 import { GREATER_THAN, GREATER_THAN_OR_EQUAL, LESS_THAN, LESS_THAN_OR_EQUAL, NUMBER } from "../../lib/expr_type";
 
-import * as Expr from "../../lib/parsers/expr";
-
-import * as RelationalExpr from "../../lib/parsers/relational_expr";
-
-describe("RelationalExpr", function () {
+describe("XPathAnalyzer", function () {
   describe("parse()", function () {
     it("should parse less-than expressions", function () {
-      var ast = RelationalExpr.parse(Expr, new XPathLexer("1 < 2"));
+      var ast = new XPathAnalyzer("1 < 2").parse();
 
       Assert.deepEqual(ast, {
         type: LESS_THAN,
@@ -27,7 +23,7 @@ describe("RelationalExpr", function () {
     });
 
     it("should parse greater-than expressions", function () {
-      var ast = RelationalExpr.parse(Expr, new XPathLexer("1 > 2"));
+      var ast = new XPathAnalyzer("1 > 2").parse();
 
       Assert.deepEqual(ast, {
         type: GREATER_THAN,
@@ -43,7 +39,7 @@ describe("RelationalExpr", function () {
     });
 
     it("should parse less-than-or-equal expressions", function () {
-      var ast = RelationalExpr.parse(Expr, new XPathLexer("1 <= 2"));
+      var ast = new XPathAnalyzer("1 <= 2").parse();
 
       Assert.deepEqual(ast, {
         type: LESS_THAN_OR_EQUAL,
@@ -59,7 +55,7 @@ describe("RelationalExpr", function () {
     });
 
     it("should parse greater-than-or-equal expressions", function () {
-      var ast = RelationalExpr.parse(Expr, new XPathLexer("1 >= 2"));
+      var ast = new XPathAnalyzer("1 >= 2").parse();
 
       Assert.deepEqual(ast, {
         type: GREATER_THAN_OR_EQUAL,

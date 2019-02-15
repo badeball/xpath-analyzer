@@ -1,17 +1,13 @@
-import Assert from "assert";
+import * as Assert from "assert";
 
-import XPathLexer from "xpath-lexer";
+import XPathAnalyzer from "../../lib/xpath_analyzer";
 
 import { NUMBER, UNION } from "../../lib/expr_type";
 
-import * as Expr from "../../lib/parsers/expr";
-
-import * as UnionExpr from "../../lib/parsers/union_expr";
-
-describe("UnionExpr", function () {
+describe("XPathAnalyzer", function () {
   describe("parse()", function () {
     it("should parse union expressions", function () {
-      var ast = UnionExpr.parse(Expr, new XPathLexer("1 | 2"));
+      var ast = new XPathAnalyzer("1 | 2").parse();
 
       Assert.deepEqual(ast, {
         type: UNION,

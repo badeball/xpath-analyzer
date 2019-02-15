@@ -1,17 +1,13 @@
-import Assert from "assert";
+import * as Assert from "assert";
 
-import XPathLexer from "xpath-lexer";
+import XPathAnalyzer from "../../lib/xpath_analyzer";
 
 import { FILTER, FUNCTION_CALL, NUMBER } from "../../lib/expr_type";
 
-import * as Expr from "../../lib/parsers/expr";
-
-import * as FilterExpr from "../../lib/parsers/filter_expr";
-
-describe("FilterExpr", function () {
+describe("XPathAnalyzer", function () {
   describe("parse()", function () {
     it("should parse primary expressions with predicates", function () {
-      var ast = FilterExpr.parse(Expr, new XPathLexer("id()[1]"));
+      var ast = new XPathAnalyzer("id()[1]").parse();
 
       Assert.deepEqual(ast, {
         type: FILTER,

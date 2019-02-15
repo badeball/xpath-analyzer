@@ -1,17 +1,13 @@
-import Assert from "assert";
+import * as Assert from "assert";
 
-import XPathLexer from "xpath-lexer";
+import XPathAnalyzer from "../../lib/xpath_analyzer";
 
 import { NUMBER, OR } from "../../lib/expr_type";
 
-import * as Expr from "../../lib/parsers/expr";
-
-import * as OrExpr from "../../lib/parsers/or_expr";
-
-describe("OrExpr", function () {
+describe("XPathAnalyzer", function () {
   describe("parse()", function () {
     it("should parse or expressions", function () {
-      var ast = OrExpr.parse(Expr, new XPathLexer("1 or 2"));
+      var ast = new XPathAnalyzer("1 or 2").parse();
 
       Assert.deepEqual(ast, {
         type: OR,

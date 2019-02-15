@@ -1,6 +1,6 @@
-import Assert from "assert";
+import * as Assert from "assert";
 
-import XPathLexer from "xpath-lexer";
+import XPathAnalyzer from "../../lib/xpath_analyzer";
 
 import { CHILD, DESCENDANT_OR_SELF } from "../../lib/axis_specifier";
 
@@ -8,14 +8,10 @@ import { ABSOLUTE_LOCATION_PATH, NODE_NAME_TEST, NODE_TYPE_TEST } from "../../li
 
 import { NODE } from "../../lib/node_type";
 
-import * as Expr from "../../lib/parsers/expr";
-
-import * as AbsoluteLocationPathExpr from "../../lib/parsers/absolute_location_path";
-
-describe("AbsoluteLocationPathExpr", function () {
+describe("XPathAnalyzer", function () {
   describe("parse()", function () {
     it("should parse the trivial absolute location path without steps", function () {
-      var ast = AbsoluteLocationPathExpr.parse(Expr, new XPathLexer("/"));
+      var ast = new XPathAnalyzer("/").parse();
 
       Assert.deepEqual(ast, {
         type: ABSOLUTE_LOCATION_PATH,
@@ -24,7 +20,7 @@ describe("AbsoluteLocationPathExpr", function () {
     });
 
     it("should parse absolute location paths with steps", function () {
-      var ast = AbsoluteLocationPathExpr.parse(Expr, new XPathLexer("/bar/foo"));
+      var ast = new XPathAnalyzer("/bar/foo").parse();
 
       Assert.deepEqual(ast, {
         type: ABSOLUTE_LOCATION_PATH,
@@ -45,7 +41,7 @@ describe("AbsoluteLocationPathExpr", function () {
     });
 
     it("should parse absolute location paths with steps (descendant)", function () {
-      var ast = AbsoluteLocationPathExpr.parse(Expr, new XPathLexer("/bar//foo"));
+      var ast = new XPathAnalyzer("/bar//foo").parse();
 
       Assert.deepEqual(ast, {
         type: ABSOLUTE_LOCATION_PATH,

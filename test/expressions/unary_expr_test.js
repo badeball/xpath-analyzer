@@ -1,17 +1,13 @@
-import Assert from "assert";
+import * as Assert from "assert";
 
-import XPathLexer from "xpath-lexer";
+import XPathAnalyzer from "../../lib/xpath_analyzer";
 
 import { NEGATION, NUMBER } from "../../lib/expr_type";
 
-import * as Expr from "../../lib/parsers/expr";
-
-import * as UnaryExpr from "../../lib/parsers/unary_expr";
-
-describe("UnaryExpr", function () {
+describe("XPathAnalyzer", function () {
   describe("parse()", function () {
     it("should parse negation expressions", function () {
-      var ast = UnaryExpr.parse(Expr, new XPathLexer("-1"));
+      var ast = new XPathAnalyzer("-1").parse();
 
       Assert.deepEqual(ast, {
         type: NEGATION,

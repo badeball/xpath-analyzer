@@ -1,17 +1,13 @@
-import Assert from "assert";
+import * as Assert from "assert";
 
-import XPathLexer from "xpath-lexer";
+import XPathAnalyzer from "../../lib/xpath_analyzer";
 
 import { AND, NUMBER } from "../../lib/expr_type";
 
-import * as Expr from "../../lib/parsers/expr";
-
-import * as AndExpr from "../../lib/parsers/and_expr";
-
-describe("AndExpr", function () {
+describe("XPathAnalyzer", function () {
   describe("parse()", function () {
     it("should parse or expressions", function () {
-      var ast = AndExpr.parse(Expr, new XPathLexer("1 and 2"));
+      var ast = new XPathAnalyzer("1 and 2").parse();
 
       Assert.deepEqual(ast, {
         type: AND,

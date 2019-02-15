@@ -1,6 +1,6 @@
-import Assert from "assert";
+import * as Assert from "assert";
 
-import XPathLexer from "xpath-lexer";
+import XPathAnalyzer from "../../lib/xpath_analyzer";
 
 import { CHILD, DESCENDANT_OR_SELF } from "../../lib/axis_specifier";
 
@@ -8,14 +8,10 @@ import { RELATIVE_LOCATION_PATH, NODE_NAME_TEST, NODE_TYPE_TEST } from "../../li
 
 import { NODE } from "../../lib/node_type";
 
-import * as Expr from "../../lib/parsers/expr";
-
-import * as RelativeLocationPathExpr from "../../lib/parsers/relative_location_path";
-
-describe("RelativeLocationPathExpr", function () {
+describe("XPathAnalyzer", function () {
   describe("parse()", function () {
     it("should parse relative location paths", function () {
-      var ast = RelativeLocationPathExpr.parse(Expr, new XPathLexer("bar//foo"));
+      var ast = new XPathAnalyzer("bar//foo").parse();
 
       Assert.deepEqual(ast, {
         type: RELATIVE_LOCATION_PATH,

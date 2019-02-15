@@ -1,6 +1,6 @@
-import Assert from "assert";
+import * as Assert from "assert";
 
-import XPathLexer from "xpath-lexer";
+import XPathAnalyzer from "../../lib/xpath_analyzer";
 
 import { CHILD, DESCENDANT_OR_SELF } from "../../lib/axis_specifier";
 
@@ -8,14 +8,10 @@ import { FUNCTION_CALL, PATH, NODE_NAME_TEST, NODE_TYPE_TEST } from "../../lib/e
 
 import { NODE } from "../../lib/node_type";
 
-import * as Expr from "../../lib/parsers/expr";
-
-import * as PathExpr from "../../lib/parsers/path_expr";
-
-describe("PathExpr", function () {
+describe("XPathAnalyzer", function () {
   describe("parse()", function () {
     it("should parse filter expressions with path", function () {
-      var ast = PathExpr.parse(Expr, new XPathLexer("id()//foo"));
+      var ast = new XPathAnalyzer("id()//foo").parse();
 
       Assert.deepEqual(ast, {
         type: PATH,

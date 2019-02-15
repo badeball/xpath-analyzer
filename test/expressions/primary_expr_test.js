@@ -1,17 +1,13 @@
-import Assert from "assert";
+import * as Assert from "assert";
 
-import XPathLexer from "xpath-lexer";
+import XPathAnalyzer from "../../lib/xpath_analyzer";
 
 import { FUNCTION_CALL, LITERAL, NUMBER } from "../../lib/expr_type";
 
-import * as Expr from "../../lib/parsers/expr";
-
-import * as PrimaryExpr from "../../lib/parsers/primary_expr";
-
-describe("PrimaryExpr", function () {
+describe("XPathAnalyzer", function () {
   describe("parse()", function () {
     it("should parse integers", function () {
-      var ast = PrimaryExpr.parse(Expr, new XPathLexer("123"));
+      var ast = new XPathAnalyzer("123").parse();
 
       Assert.deepEqual(ast, {
         type: NUMBER,
@@ -20,7 +16,7 @@ describe("PrimaryExpr", function () {
     });
 
     it("should parse floating numbers", function () {
-      var ast = PrimaryExpr.parse(Expr, new XPathLexer("123.123"));
+      var ast = new XPathAnalyzer("123.123").parse();
 
       Assert.deepEqual(ast, {
         type: NUMBER,
@@ -29,7 +25,7 @@ describe("PrimaryExpr", function () {
     });
 
     it("should parse literals", function () {
-      var ast = PrimaryExpr.parse(Expr, new XPathLexer("'foo'"));
+      var ast = new XPathAnalyzer("'foo'").parse();
 
       Assert.deepEqual(ast, {
         type: LITERAL,
@@ -38,7 +34,7 @@ describe("PrimaryExpr", function () {
     });
 
     it("should parse groups", function () {
-      var ast = PrimaryExpr.parse(Expr, new XPathLexer("('foo')"));
+      var ast = new XPathAnalyzer("('foo')").parse();
 
       Assert.deepEqual(ast, {
         type: LITERAL,
@@ -47,18 +43,12 @@ describe("PrimaryExpr", function () {
     });
 
     it("should parse function calls", function () {
-      var ast = PrimaryExpr.parse(Expr, new XPathLexer("id()"));
+      var ast = new XPathAnalyzer("id()").parse();
 
       Assert.deepEqual(ast, {
         type: FUNCTION_CALL,
         name: "id"
       });
-    });
-
-    it("should not parse node type tests", function () {
-      var ast = PrimaryExpr.parse(Expr, new XPathLexer("comment()"));
-
-      Assert.equal(ast, undefined);
     });
   });
 });

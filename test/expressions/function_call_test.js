@@ -1,17 +1,13 @@
-import Assert from "assert";
+import * as Assert from "assert";
 
-import XPathLexer from "xpath-lexer";
+import XPathAnalyzer from "../../lib/xpath_analyzer";
 
 import { FUNCTION_CALL, LITERAL } from "../../lib/expr_type";
 
-import * as Expr from "../../lib/parsers/expr";
-
-import * as FunctionCall from "../../lib/parsers/function_call";
-
-describe("FunctionCall", function () {
+describe("XPathAnalyzer", function () {
   describe("parse()", function () {
     it("should parse function arguments", function () {
-      var ast = FunctionCall.parse(Expr, new XPathLexer("id('foo')"));
+      var ast = new XPathAnalyzer("id('foo')").parse();
 
       Assert.deepEqual(ast, {
         type: FUNCTION_CALL,
@@ -24,7 +20,7 @@ describe("FunctionCall", function () {
     });
 
     it("should parse multiple function arguments", function () {
-      var ast = FunctionCall.parse(Expr, new XPathLexer("id('foo', 'bar')"));
+      var ast = new XPathAnalyzer("id('foo', 'bar')").parse();
 
       Assert.deepEqual(ast, {
         type: FUNCTION_CALL,
