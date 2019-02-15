@@ -67,11 +67,5 @@ describe("XPathAnalyzer", function () {
         }]
       });
     });
-
-    it("should throw upon unknown node type", function () {
-      Assert.throws(function () {
-        new XPathAnalyzer("/foo()").parse();
-      });
-    });
   });
 });

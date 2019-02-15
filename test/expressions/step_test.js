@@ -38,12 +38,6 @@ describe("XPathAnalyzer", function () {
       });
     });
 
-    it("should throw upon unknown axis", function () {
-      Assert.throws(function () {
-        new XPathAnalyzer("bar::foo").parse();
-      });
-    });
-
     it("should parse the abbreviated axis specifier @", function () {
       var ast = new XPathAnalyzer("@foo").parse();
 
