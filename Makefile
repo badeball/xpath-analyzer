@@ -1,27 +1,28 @@
 MOCHA := ./node_modules/.bin/_mocha
-ESLINT := ./node_modules/.bin/eslint
 NYC := ./node_modules/.bin/nyc
 ROLLUP := ./node_modules/.bin/rollup
+DTS := ./node_modules/.bin/dts-bundle-generator
 
-all: lint test
+all: test
 
-ci: ensure-built lint test-cover
+ci: ensure-built test-cover
 
 lint:
-	@$(ESLINT) .
+	echo "Not yet implemented"
+	false
 
 test:
-	@$(MOCHA) --require esm --recursive --reporter dot
+	$(MOCHA) --require ts-node/register --recursive --reporter dot "test/**/*_test.ts"
 
 test-cover:
-	@$(NYC) --temp-directory coverage/ --require esm $(MOCHA) --recursive --reporter dot
-	@$(NYC) --temp-directory coverage/ report --reporter text-lcov > coverage.lcov
+	$(NYC) --temp-directory coverage/ --require ts-node/register --extension .ts $(MOCHA) --recursive --reporter dot "test/**/*_test.ts"
+	$(NYC) --temp-directory coverage/ report --reporter text-lcov > coverage.lcov
 
 build:
-	@$(ROLLUP) --external xpath-lexer --format cjs --file dist/xpath_analyzer.cjs.js --output.exports named lib/xpath_analyzer.js
-	@$(ROLLUP) --external xpath-lexer --format es --file dist/xpath_analyzer.esm.js lib/xpath_analyzer.js
+	$(ROLLUP) --config
+	$(DTS) -o dist/xpath_analyzer.d.ts lib/xpath_analyzer.ts
 
 ensure-built: build
-	@[ -z "$(shell git status -s dist/)" ]
+	[ -z "$(shell git status -s dist/)" ]
 
-.PHONY: lint test test-cover build ensure-built
+.PHONY: test test-cover build ensure-built

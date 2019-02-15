@@ -4,6 +4,7 @@
   "description": "An analyzer / parser for XPath 1.0 expressions.",
   "main": "dist/xpath_analyzer.cjs.js",
   "module": "dist/xpath_analyzer.esm.js",
+  "types": "dist/xpath_analyzer.d.ts",
   "author": "Jonas Amundsen <jonasba@gmail.com>",
   "repository": {
     "type": "git",
@@ -13,15 +14,18 @@
     "prepublishOnly": "make ensure-built"
   },
   "dependencies": {
-    "xpath-lexer": "^1.2.1"
+    "xpath-lexer": "^1.2.2"
   },
   "devDependencies": {
+    "@types/mocha": "^5.2.5",
     "codeclimate-test-reporter": "^0.5.1",
-    "eslint": "^5.12.0",
-    "esm": "^3.0.84",
+    "dts-bundle-generator": "^2.0.0",
     "mocha": "^5.2.0",
     "nyc": "^13.1.0",
-    "rollup": "^1.0.1"
+    "rollup": "^1.0.1",
+    "rollup-plugin-typescript2": "^0.18.1",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.2.2"
   },
   "files": [
     "dist"
