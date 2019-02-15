@@ -1,8 +1,8 @@
 import * as Assert from "assert";
 
-import XPathAnalyzer from "../../lib/xpath_analyzer";
-
-import { GREATER_THAN, GREATER_THAN_OR_EQUAL, LESS_THAN, LESS_THAN_OR_EQUAL, NUMBER } from "../../lib/expr_type";
+import XPathAnalyzer, {
+  GREATER_THAN, GREATER_THAN_OR_EQUAL, LESS_THAN, LESS_THAN_OR_EQUAL, NUMBER
+} from "../../lib/xpath_analyzer";
 
 describe("XPathAnalyzer", function () {
   describe("parse()", function () {

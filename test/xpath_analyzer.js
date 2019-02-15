@@ -1,12 +1,10 @@
 import Assert from "assert";
 
-import XPathAnalyzer from "../lib/xpath_analyzer";
-
-import { CHILD, DESCENDANT_OR_SELF, FOLLOWING } from "../lib/axis_specifier";
-
-import { EQUALITY, FUNCTION_CALL, LITERAL, NUMBER, OR, PATH, RELATIVE_LOCATION_PATH, NODE_NAME_TEST, NODE_TYPE_TEST } from "../lib/expr_type";
-
-import { NODE } from "../lib/node_type";
+import XPathAnalyzer, {
+  CHILD, DESCENDANT_OR_SELF, FOLLOWING,
+  EQUALITY, FUNCTION_CALL, LITERAL, NUMBER, OR, PATH, RELATIVE_LOCATION_PATH, NODE_NAME_TEST, NODE_TYPE_TEST,
+  NODE
+} from "../lib/xpath_analyzer";
 
 function itShouldThrowUponExpression (expression, message) {
   describe("when given the erroneous expression \"" + expression + "\"", function () {

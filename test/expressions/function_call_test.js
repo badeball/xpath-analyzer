@@ -1,8 +1,8 @@
 import * as Assert from "assert";
 
-import XPathAnalyzer from "../../lib/xpath_analyzer";
-
-import { FUNCTION_CALL, LITERAL } from "../../lib/expr_type";
+import XPathAnalyzer, {
+  FUNCTION_CALL, LITERAL
+} from "../../lib/xpath_analyzer";
 
 describe("XPathAnalyzer", function () {
   describe("parse()", function () {

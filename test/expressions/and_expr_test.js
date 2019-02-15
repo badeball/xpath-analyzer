@@ -1,8 +1,8 @@
 import * as Assert from "assert";
 
-import XPathAnalyzer from "../../lib/xpath_analyzer";
-
-import { AND, NUMBER } from "../../lib/expr_type";
+import XPathAnalyzer, {
+  AND, NUMBER
+} from "../../lib/xpath_analyzer";
 
 describe("XPathAnalyzer", function () {
   describe("parse()", function () {

@@ -1,12 +1,10 @@
 import * as Assert from "assert";
 
-import XPathAnalyzer from "../../lib/xpath_analyzer";
-
-import { CHILD, DESCENDANT_OR_SELF } from "../../lib/axis_specifier";
-
-import { ABSOLUTE_LOCATION_PATH, NODE_NAME_TEST, NODE_TYPE_TEST } from "../../lib/expr_type";
-
-import { NODE } from "../../lib/node_type";
+import XPathAnalyzer, {
+  CHILD, DESCENDANT_OR_SELF,
+  ABSOLUTE_LOCATION_PATH, NODE_NAME_TEST, NODE_TYPE_TEST,
+  NODE
+} from "../../lib/xpath_analyzer";
 
 describe("XPathAnalyzer", function () {
   describe("parse()", function () {
