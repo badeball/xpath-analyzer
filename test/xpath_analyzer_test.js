@@ -1,4 +1,4 @@
-import Assert from "assert";
+import * as Assert from "assert";
 
 import XPathAnalyzer, {
   CHILD, DESCENDANT_OR_SELF, FOLLOWING,
