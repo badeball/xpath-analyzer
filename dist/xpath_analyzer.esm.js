@@ -133,11 +133,17 @@ function parse$1(rootParser, lexer) {
         lexer.next();
     }
     else {
-        while (lexer.peak() !== ")") {
+        while (lexer.peak() !== ")" && !lexer.empty()) {
             functionCall.args.push(rootParser.parse(lexer));
             if (lexer.peak() === ",") {
                 lexer.next();
             }
+            else if (lexer.peak() !== ")") {
+                throw new Error("Invalid token at position " + lexer.position() + ", expected argument separator or closing parenthesis");
+            }
+        }
+        if (lexer.empty()) {
+            throw new Error("Unexpcted end of string at position " + lexer.position());
         }
         lexer.next();
     }

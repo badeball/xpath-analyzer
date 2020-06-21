@@ -21,5 +21,7 @@ describe("XPathAnalyzer", function () {
     itShouldThrowUponExpression("(/foo", "Invalid token at position 5, expected closing parenthesis");
     itShouldThrowUponExpression("/foo[0", "Invalid token at position 6, expected closing bracket");
     itShouldThrowUponExpression("(/foo) 1", "Unexpected token at position 7");
+    itShouldThrowUponExpression("id(", "Unexpcted end of string at position 3")
+    itShouldThrowUponExpression("id(''.", "Invalid token at position 5, expected argument separator or closing parenthesis");
   });
 });
