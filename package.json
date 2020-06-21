@@ -1,6 +1,6 @@
 {
   "name": "xpath-analyzer",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "An analyzer / parser for XPath 1.0 expressions.",
   "main": "dist/xpath_analyzer.cjs.js",
   "module": "dist/xpath_analyzer.esm.js",
